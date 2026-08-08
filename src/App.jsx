@@ -57,7 +57,7 @@ const AmbientGlow = () => {
   }, []);
 
   return (
-    <div 
+    <div
       className="fixed top-0 left-0 w-[80vw] h-[80vw] bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_60%)] blur-[120px] pointer-events-none z-0 mix-blend-screen transition-transform duration-[1500ms] ease-out"
       style={{ transform: `translate(calc(${pos.x}px - 40vw), calc(${pos.y}px - 40vw))` }}
     />
@@ -166,7 +166,7 @@ function App() {
 
         {/* Center Content */}
         <div className="flex flex-col items-start gap-8 mb-8 z-20 pointer-events-auto">
-          <h2 className="text-left text-white text-6xl font-black leading-[1.1] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)]">
+          <h2 className="text-left text-white text-7xl font-black leading-[1.1] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)]">
             Designed<br />To Be<br />Experienced.
           </h2>
 
