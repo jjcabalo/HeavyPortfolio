@@ -95,6 +95,17 @@ const NavLink = ({ href, text, disableHover }) => {
 };
 
 function App() {
+  React.useEffect(() => {
+    let lastRatio = window.devicePixelRatio;
+    const handleResize = () => {
+      if (window.devicePixelRatio !== lastRatio) {
+        window.location.reload();
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className="relative w-screen h-screen flex flex-col justify-between overflow-hidden bg-studio-rays">
       <CustomCursor />
