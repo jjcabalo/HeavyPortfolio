@@ -50,23 +50,27 @@ const CustomCursor = () => {
 
 const DesktopNotice = () => {
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/40 backdrop-blur-[40px] lg:hidden animate-fade-in">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/50 backdrop-blur-xl lg:hidden animate-fade-in">
       <div className="glass-card relative flex flex-col items-start p-10 max-w-[420px] w-full animate-others delay-300">
-        <div className="w-12 h-12 flex items-center justify-center bg-[#ffd500] rounded-full mb-8">
-          <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="3" y1="9" x2="21" y2="9"></line>
-            <line x1="9" y1="21" x2="9" y2="9"></line>
-          </svg>
-        </div>
-        <h3 className="text-3xl font-black text-white leading-tight mb-4 tracking-tight">
+        <img 
+          src="/jyellow.png" 
+          alt="J Logo" 
+          className="w-14 h-16 object-contain mb-8" 
+        />
+        <h3 className="text-4xl font-black text-white leading-tight mb-4 tracking-tighter">
           Viewport<br />Restricted.
         </h3>
-        <p className="text-[#aaa] text-base leading-relaxed mb-10 font-medium">
+        <p className="text-[#999] text-sm leading-relaxed mb-10 font-medium">
           This experience relies on a wider viewport. For the intended layout and smooth animations, please expand your window or switch to a PC.
         </p>
-        <div className="w-full bg-white/5 border border-white/10 text-[#aaa] font-bold py-4 rounded-lg text-center text-sm tracking-widest uppercase cursor-not-allowed select-none">
-          Locked for Mobile
+        
+        <div className="flex items-center gap-3 self-end text-[#666] text-xs font-bold tracking-[0.2em] uppercase select-none">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+          Desktop Only
         </div>
       </div>
     </div>
@@ -165,7 +169,7 @@ function App() {
 
         {/* Right Side Cards */}
         <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto">
-          <div className="glass-card w-fit p-6 -mt-20">
+          <div className="glass-card w-fit p-6 -translate-y-3">
             <ul className="flex flex-col gap-4 w-full list-none whitespace-nowrap">
               <li className="flex items-center gap-4 font-semibold text-base text-white">
                 <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
