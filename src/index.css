@@ -115,14 +115,36 @@ button {
   animation: fadeInOverlay 0.25s ease-out forwards;
 }
 
+@keyframes johnContainerSequence {
+  0% {
+    transform: translate(100vw, 40vh);
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  40% {
+    transform: translate(0, 40vh);
+    animation-timing-function: linear;
+  }
+  55% {
+    transform: translate(0, 40vh);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.animate-john-container {
+  animation: johnContainerSequence 2.0s forwards;
+}
+
 .animate-john {
   opacity: 0;
-  animation: revealJohnLetter 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: revealJohnLetter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-others {
   opacity: 0;
-  animation: revealOthers 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation: revealOthers 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .delay-1000 {
@@ -130,17 +152,17 @@ button {
 }
 
 .delay-1200 {
-  animation-delay: 1200ms;
+  animation-delay: 1500ms;
 }
 
 .delay-1400 {
-  animation-delay: 1400ms;
-}
-
-.delay-1600 {
   animation-delay: 1600ms;
 }
 
+.delay-1600 {
+  animation-delay: 1700ms;
+}
+
 .delay-2000 {
-  animation-delay: 2000ms;
+  animation-delay: 1800ms;
 }

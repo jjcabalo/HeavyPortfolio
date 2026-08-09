@@ -52,10 +52,10 @@ const DesktopNotice = () => {
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/50 backdrop-blur-xl lg:hidden animate-fade-in">
       <div className="glass-card relative flex flex-col items-start p-10 max-w-[420px] w-full animate-others delay-300">
-        <img 
-          src="/jyellow.png" 
-          alt="J Logo" 
-          className="w-14 h-16 object-contain mb-8" 
+        <img
+          src="/jyellow.png"
+          alt="J Logo"
+          className="w-14 h-16 object-contain mb-8"
         />
         <h3 className="text-4xl font-black text-white leading-tight mb-4 tracking-tighter">
           Viewport<br />Restricted.
@@ -63,7 +63,7 @@ const DesktopNotice = () => {
         <p className="text-[#999] text-sm leading-relaxed mb-10 font-medium">
           This experience relies on a wider viewport. For the intended layout and smooth animations, please expand your window or switch to a PC.
         </p>
-        
+
         <div className="flex items-center gap-3 self-end text-[#666] text-xs font-bold tracking-[0.2em] uppercase select-none">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
@@ -90,10 +90,10 @@ function App() {
       <DesktopNotice />
       {/* Background Text & Nav Container (Locks them together) */}
       <div className="absolute top-[-5%] w-full flex flex-col items-center z-0 pointer-events-none">
-        <h1 className="text-[35vw] font-black text-[#ffd500]/80 leading-none whitespace-nowrap select-none tracking-tighter ml-[-0.8vw] flex justify-center">
+        <h1 className="animate-john-container text-[35vw] font-black text-[#ffd500]/80 leading-none whitespace-nowrap select-none tracking-tighter ml-[-0.8vw] flex justify-center">
           {"JOHN".split("").map((char, index) => (
             <span key={index} className="inline-flex overflow-hidden pb-[2vw] mb-[-2vw] px-[1vw] mx-[-1vw]">
-              <span className="animate-john inline-block leading-none" style={{ animationDelay: `${(3 - index) * 200}ms` }}>{char}</span>
+              <span className="animate-john inline-block leading-none" style={{ animationDelay: `${index * 100}ms` }}>{char}</span>
             </span>
           ))}
         </h1>
