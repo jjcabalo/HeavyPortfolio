@@ -50,22 +50,22 @@ const CustomCursor = () => {
 
 const DesktopNotice = () => {
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/50 backdrop-blur-xl lg:hidden animate-fade-in">
-      <div className="glass-card relative flex flex-col items-start p-10 max-w-[26.25rem] w-full animate-others delay-300">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-[24px] bg-black/50 backdrop-blur-xl lg:hidden animate-fade-in">
+      <div className="glass-card relative flex flex-col items-start p-[40px] max-w-[420px] w-full animate-others delay-300" style={{ borderRadius: '24px' }}>
         <img
           src="/jyellow.png"
           alt="J Logo"
-          className="w-14 h-16 object-contain mb-8"
+          className="w-[56px] h-[64px] object-contain mb-[32px]"
         />
-        <h3 className="text-4xl font-black text-white leading-tight mb-4 tracking-tighter">
+        <h3 className="text-[36px] font-black text-white leading-tight mb-[16px] tracking-tighter">
           Viewport<br />Restricted.
         </h3>
-        <p className="text-[#999] text-sm leading-relaxed mb-10 font-medium">
+        <p className="text-[#999] text-[14px] leading-relaxed mb-[40px] font-medium">
           This experience relies on a wider viewport. For the intended layout and smooth animations, please expand your window or switch to a PC.
         </p>
 
-        <div className="flex items-center gap-3 self-end text-[#666] text-xs font-bold tracking-[0.2em] uppercase select-none">
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+        <div className="flex items-center gap-[12px] self-end text-[#666] text-[12px] font-bold tracking-[0.2em] uppercase select-none">
+          <svg className="w-[16px] h-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
             <line x1="8" y1="21" x2="16" y2="21"></line>
             <line x1="12" y1="17" x2="12" y2="21"></line>
