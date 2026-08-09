@@ -51,7 +51,7 @@ const CustomCursor = () => {
 const DesktopNotice = () => {
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/50 backdrop-blur-xl lg:hidden animate-fade-in">
-      <div className="glass-card relative flex flex-col items-start p-10 max-w-[420px] w-full animate-others delay-300">
+      <div className="glass-card relative flex flex-col items-start p-10 max-w-[26.25rem] w-full animate-others delay-300">
         <img
           src="/jyellow.png"
           alt="J Logo"
@@ -159,11 +159,11 @@ function App() {
 
         {/* Left Side Cards */}
         <div className="flex flex-col gap-6 w-fit z-20 pointer-events-auto">
-          <div className="glass-card flex items-center gap-6 p-6 w-[240px] -ml-12 animate-others delay-2000">
+          <div className="glass-card flex items-center gap-6 p-6 w-[15rem] -ml-12 animate-others delay-2000">
             <img
               src="/jyellow.png"
               alt="J Logo"
-              className="w-[58px] h-[72px] object-contain shrink-0"
+              className="w-[3.625rem] h-[4.5rem] object-contain shrink-0"
             />
             <div className="text-base leading-tight text-white whitespace-nowrap">
               <strong className="text-3xl">10+</strong><br />
@@ -171,7 +171,7 @@ function App() {
             </div>
           </div>
 
-          <div className="glass-card flex flex-col items-center justify-center gap-2 p-6 w-fit min-w-[140px] animate-others delay-2000">
+          <div className="glass-card flex flex-col items-center justify-center gap-2 p-6 w-fit min-w-[8.75rem] animate-others delay-2000">
             <div className="text-7xl font-black text-accent-yellow leading-none">
               4+
             </div>
