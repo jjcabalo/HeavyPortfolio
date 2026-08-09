@@ -1,17 +1,17 @@
 import React from 'react';
 import './index.css';
 
-const SlotText = ({ text }) => (
+const SlotText = ({ text, isAnimating }) => (
   <span className="flex gap-[0.25em]">
     {text.split(' ').map((word, i) => (
       <span key={i} className="relative overflow-hidden flex flex-col h-[1.2em] leading-[1.2em] inline-flex">
         <span
-          className="transition-transform duration-300 ease-in-out group-hover:-translate-y-full"
-          style={{ transitionDelay: `${i * 50}ms` }}
+          className={`ease-out ${isAnimating ? '-translate-y-full transition-transform duration-300' : 'translate-y-0 transition-none'}`}
+          style={{ transitionDelay: isAnimating ? `${i * 50}ms` : '0ms' }}
         >{word}</span>
         <span
-          className="absolute top-full transition-transform duration-300 ease-in-out group-hover:-translate-y-full"
-          style={{ transitionDelay: `${i * 50}ms` }}
+          className={`absolute top-full ease-out ${isAnimating ? '-translate-y-full transition-transform duration-300' : 'translate-y-0 transition-none'}`}
+          style={{ transitionDelay: isAnimating ? `${i * 50}ms` : '0ms' }}
         >{word}</span>
       </span>
     ))}
@@ -77,11 +77,22 @@ const DesktopNotice = () => {
   );
 };
 
-const NavLink = ({ href, text }) => (
-  <a href={href} className="group text-white">
-    <SlotText text={text} />
-  </a>
-);
+const NavLink = ({ href, text, disableHover }) => {
+  const [isAnimating, setIsAnimating] = React.useState(false);
+
+  const handleMouseEnter = () => {
+    if (disableHover || isAnimating) return;
+    setIsAnimating(true);
+    const maxDelay = (text.split(' ').length - 1) * 50;
+    setTimeout(() => setIsAnimating(false), 300 + maxDelay + 50);
+  };
+
+  return (
+    <a href={href} className="group text-white" onMouseEnter={handleMouseEnter}>
+      {disableHover ? text : <SlotText text={text} isAnimating={isAnimating} />}
+    </a>
+  );
+};
 
 function App() {
   return (
@@ -100,7 +111,7 @@ function App() {
         <div className="w-full mt-[-2vw] px-16 pointer-events-auto overflow-hidden">
           <header className="w-full flex justify-between text-base font-bold tracking-wide animate-john delay-1200">
             <nav className="flex items-center gap-6">
-              <NavLink href="#home" text="HOME" />
+              <NavLink href="#home" text="HOME" disableHover={true} />
               <span className="text-white font-light">|</span>
               <NavLink href="#about" text="ABOUT ME" />
               <span className="text-white font-light">|</span>
@@ -123,21 +134,21 @@ function App() {
 
       {/* Editorial Hero Details */}
       <div className="absolute bottom-14 left-14 z-20 text-lg leading-relaxed font-medium text-[#aaa]">
-        <div className="overflow-hidden"><p className="animate-john delay-1600">Design with intent.</p></div>
+        <div className="overflow-hidden"><p className="animate-john delay-1600">Designed with purpose.</p></div>
         <div className="overflow-hidden"><p className="animate-john" style={{ animationDelay: '1750ms' }}>Built by John.</p></div>
       </div>
 
       <div className="absolute bottom-14 right-14 z-20 text-lg leading-relaxed font-medium text-right text-[#aaa]">
-        <div className="overflow-hidden flex justify-end"><p className="animate-john delay-1600">Bold ideas, brought to the web.</p></div>
-        <div className="overflow-hidden flex justify-end"><p className="animate-john" style={{ animationDelay: '1750ms' }}>Thoughtful design, built to move.</p></div>
-        <div className="overflow-hidden flex justify-end"><p className="animate-john" style={{ animationDelay: '1900ms' }}>Experiences that leave a mark.</p></div>
+        <div className="overflow-hidden flex justify-end"><p className="animate-john delay-1600">Building ideas worth seeing.</p></div>
+        <div className="overflow-hidden flex justify-end"><p className="animate-john" style={{ animationDelay: '1750ms' }}>Designs worth feeling.</p></div>
+        <div className="overflow-hidden flex justify-end"><p className="animate-john" style={{ animationDelay: '1900ms' }}>Experiences worth remembering.</p></div>
       </div>
       {/* Bottom Content Overlays */}
-      <div className="relative z-20 flex justify-center gap-16 items-end px-16 pb-16 h-full w-full pointer-events-none animate-others delay-2000">
+      <div className="relative z-20 flex justify-center gap-16 items-end px-16 pb-16 h-full w-full pointer-events-none">
 
         {/* Left Side Cards */}
         <div className="flex flex-col gap-6 w-fit z-20 pointer-events-auto">
-          <div className="glass-card flex items-center gap-6 p-6 w-[240px] -ml-12">
+          <div className="glass-card flex items-center gap-6 p-6 w-[240px] -ml-12 animate-others delay-2000">
             <img
               src="/jyellow.png"
               alt="J Logo"
@@ -149,27 +160,27 @@ function App() {
             </div>
           </div>
 
-          <div className="glass-card flex flex-col items-center justify-center gap-2 p-6 w-fit min-w-[140px]">
+          <div className="glass-card flex flex-col items-center justify-center gap-2 p-6 w-fit min-w-[140px] animate-others delay-2000">
             <div className="text-7xl font-black text-accent-yellow leading-none">
               4+
             </div>
             <div className="text-base leading-tight text-white text-center whitespace-nowrap">
-              Years of<br />experience
+              Years of<br />Designing
             </div>
           </div>
         </div>
 
         {/* Center Content */}
         <div className="flex flex-col items-start gap-8 mb-8 z-20 pointer-events-auto">
-          <h2 className="text-left text-white text-7xl font-black leading-[1.1] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)]">
+          <h2 className="text-left text-white text-7xl font-black leading-[1.1] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)] animate-others delay-2000">
             Portfolio<br />Built To<br />Experience.
           </h2>
 
         </div>
 
         {/* Right Side Cards */}
-        <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto">
-          <div className="glass-card w-fit p-6 -translate-y-3">
+        <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto -translate-y-3">
+          <div className="glass-card w-fit p-6 -translate-y-3 animate-others delay-2000">
             <ul className="flex flex-col gap-4 w-full list-none whitespace-nowrap">
               <li className="flex items-center gap-4 font-semibold text-base text-white">
                 <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
