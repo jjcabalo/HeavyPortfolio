@@ -94,6 +94,17 @@ const NavLink = ({ href, text, disableHover }) => {
   );
 };
 
+const InteractiveWord = ({ children }) => {
+  return (
+    <span className="relative inline-block group cursor-pointer">
+      <span className="invisible">{children}</span>
+      <span className="absolute top-0 left-0 whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:text-[#ffd500] group-hover:font-['Playfair_Display',serif] group-hover:italic group-hover:scale-[1.03] group-hover:-rotate-1 origin-center">
+        {children}
+      </span>
+    </span>
+  );
+};
+
 function App() {
   React.useEffect(() => {
     let lastRatio = window.devicePixelRatio;
@@ -183,8 +194,10 @@ function App() {
 
         {/* Center Content */}
         <div className="flex flex-col items-start gap-8 mb-8 z-20 pointer-events-auto">
-          <h2 className="text-left text-white text-7xl font-black leading-[1.1] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)] animate-others delay-2000">
-            Portfolio<br />Built To<br />Experience.
+          <h2 className="text-left text-white text-7xl font-black leading-[1.1] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)] animate-others delay-2000 select-none">
+            <InteractiveWord>Portfolio</InteractiveWord><br />
+            <InteractiveWord>Built</InteractiveWord> <InteractiveWord>To</InteractiveWord><br />
+            <InteractiveWord>Experience.</InteractiveWord>
           </h2>
 
         </div>
