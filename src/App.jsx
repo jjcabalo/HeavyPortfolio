@@ -134,16 +134,22 @@ function App() {
         {/* Left Side Cards */}
         <div className="flex flex-col gap-6 w-fit z-20 pointer-events-auto">
           <div className="glass-card flex items-center gap-6 p-6 w-[240px] -ml-12">
-            <img src="/jyellow.png" alt="J Logo" className="w-[58px] h-[72px] object-contain shrink-0" />
+            <img
+              src="/jyellow.png"
+              alt="J Logo"
+              className="w-[58px] h-[72px] object-contain shrink-0"
+            />
             <div className="text-base leading-tight text-white whitespace-nowrap">
-              <strong className="text-2xl">10+</strong><br />
+              <strong className="text-3xl">10+</strong><br />
               Projects Made
             </div>
           </div>
 
           <div className="glass-card flex flex-col items-center justify-center gap-2 p-6 w-fit min-w-[140px]">
-            <div className="text-7xl font-black text-accent-yellow leading-none">4+</div>
-            <div className="text-sm leading-tight text-white text-center whitespace-nowrap">
+            <div className="text-7xl font-black text-accent-yellow leading-none">
+              4+
+            </div>
+            <div className="text-base leading-tight text-white text-center whitespace-nowrap">
               Years of<br />experience
             </div>
           </div>
@@ -162,9 +168,12 @@ function App() {
           <div className="glass-card w-fit p-6 -mt-20">
             <ul className="flex flex-col gap-4 w-full list-none whitespace-nowrap">
               <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12,12 L20.66,7 A10,10 0 1,0 20.66,17 Z" /></svg>
+                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12,12 L20.66,7 A10,10 0 1,0 20.66,17 Z" />
+                </svg>
                 Creative
               </li>
+
               <li className="flex items-center gap-4 font-semibold text-base text-white">
                 <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <circle cx="7" cy="7" r="5" />
@@ -172,12 +181,16 @@ function App() {
                   <circle cx="7" cy="17" r="5" />
                   <circle cx="17" cy="17" r="5" />
                 </svg>
-                Reliable
+                Detail-Oriented
               </li>
+
               <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M2 8 v10 a2 2 0 0 0 2 2 h16 a2 2 0 0 0 2-2 v-10 a2 2 0 0 0-4 0 v6 h-4 v-8 a2 2 0 0 0-4 0 v8 h-4 v-6 a2 2 0 0 0-4 0 z" /></svg>
+                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M2 8 v10 a2 2 0 0 0 2 2 h16 a2 2 0 0 0 2-2 v-10 a2 2 0 0 0-4 0 v6 h-4 v-8 a2 2 0 0 0-4 0 v8 h-4 v-6 a2 2 0 0 0-4 0 z" />
+                </svg>
                 Unique
               </li>
+
               <li className="flex items-center gap-4 font-semibold text-base text-white">
                 <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 3 L3 9.5 L12 15 L21 9.5 Z" />
@@ -185,6 +198,7 @@ function App() {
                 </svg>
                 Builder
               </li>
+
               <li className="flex items-center gap-4 font-semibold text-base text-white">
                 <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <circle cx="7" cy="7" r="5" />
@@ -193,7 +207,7 @@ function App() {
                   <circle cx="17" cy="17" r="5" />
                   <rect x="7" y="7" width="10" height="10" />
                 </svg>
-                Efficient
+                Playful
               </li>
             </ul>
           </div>
