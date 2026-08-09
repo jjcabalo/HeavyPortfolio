@@ -15,6 +15,15 @@
     border-radius: 1.5rem;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
+
+  .bg-studio-rays {
+    background-color: #08080a;
+    background-image:
+      linear-gradient(to bottom, #000000 0%, transparent 25%, transparent 75%, #000000 100%),
+      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255, 255, 255, 0.12) 0%, transparent 100%),
+      linear-gradient(135deg, transparent 35%, rgba(255, 255, 255, 0.02) 50%, transparent 65%),
+      linear-gradient(225deg, transparent 35%, rgba(255, 255, 255, 0.02) 50%, transparent 65%);
+  }
 }
 
 body {
@@ -25,29 +34,72 @@ body {
   cursor: none;
 }
 
-a, button {
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+  background-repeat: repeat;
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+}
+
+a,
+button {
   cursor: none;
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes revealJohnLetter {
-  0% { opacity: 0; transform: translateY(100%); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes revealOthers {
-  0% { opacity: 0; transform: translate(var(--tw-translate-x, 0), 40px); filter: blur(10px); }
-  100% { opacity: 1; transform: translate(var(--tw-translate-x, 0), 0); filter: none; }
+  0% {
+    opacity: 0;
+    transform: translate(var(--tw-translate-x, 0), 40px);
+    filter: blur(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(var(--tw-translate-x, 0), 0);
+    filter: none;
+  }
 }
 
 @keyframes fadeInOverlay {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .animate-fade-in {
@@ -64,7 +116,22 @@ a, button {
   animation: revealOthers 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-.delay-1000 { animation-delay: 1000ms; }
-.delay-1200 { animation-delay: 1200ms; }
-.delay-1400 { animation-delay: 1400ms; }
-.delay-1600 { animation-delay: 1600ms; }
+.delay-1000 {
+  animation-delay: 1000ms;
+}
+
+.delay-1200 {
+  animation-delay: 1200ms;
+}
+
+.delay-1400 {
+  animation-delay: 1400ms;
+}
+
+.delay-1600 {
+  animation-delay: 1600ms;
+}
+
+.delay-2000 {
+  animation-delay: 2000ms;
+}

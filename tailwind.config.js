@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'accent-yellow': '#ffe45f',
+        'accent-yellow': '#ffff23',
         'dark-bg': '#050505',
       },
       fontFamily: {

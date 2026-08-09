@@ -47,22 +47,6 @@ const CustomCursor = () => {
   );
 };
 
-const AmbientGlow = () => {
-  const [pos, setPos] = React.useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
-
-  React.useEffect(() => {
-    const updatePos = (e) => setPos({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', updatePos);
-    return () => window.removeEventListener('mousemove', updatePos);
-  }, []);
-
-  return (
-    <div
-      className="fixed top-0 left-0 w-[80vw] h-[80vw] bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_60%)] blur-[120px] pointer-events-none z-0 mix-blend-screen transition-transform duration-[1500ms] ease-out"
-      style={{ transform: `translate(calc(${pos.x}px - 40vw), calc(${pos.y}px - 40vw))` }}
-    />
-  );
-};
 
 const DesktopNotice = () => {
   return (
@@ -97,59 +81,60 @@ const NavLink = ({ href, text }) => (
 
 function App() {
   return (
-    <div className="relative w-screen h-screen flex flex-col justify-between overflow-hidden bg-dark-bg">
+    <div className="relative w-screen h-screen flex flex-col justify-between overflow-hidden bg-studio-rays">
       <CustomCursor />
-      <AmbientGlow />
       <DesktopNotice />
       {/* Background Text & Nav Container (Locks them together) */}
       <div className="absolute top-[-5%] w-full flex flex-col items-center z-0 pointer-events-none">
         <h1 className="text-[35vw] font-black text-[#ffd500]/80 leading-none whitespace-nowrap select-none tracking-tighter ml-[-0.8vw] flex justify-center">
           {"JOHN".split("").map((char, index) => (
             <span key={index} className="inline-flex overflow-hidden pb-[2vw] mb-[-2vw] px-[1vw] mx-[-1vw]">
-              <span className="animate-john inline-block leading-none" style={{ animationDelay: `${(3 - index) * 150}ms` }}>{char}</span>
+              <span className="animate-john inline-block leading-none" style={{ animationDelay: `${(3 - index) * 200}ms` }}>{char}</span>
             </span>
           ))}
         </h1>
-        <header className="w-full flex justify-between px-16 text-sm font-bold tracking-wide mt-[-2vw] pointer-events-auto animate-others delay-1000">
-          <nav className="flex items-center gap-6">
-            <NavLink href="#home" text="HOME" />
-            <span className="text-white font-light">|</span>
-            <NavLink href="#about" text="ABOUT ME" />
-            <span className="text-white font-light">|</span>
-            <NavLink href="#experiences" text="EXPERIENCES" />
-          </nav>
-          <nav className="flex items-center gap-6">
-            <NavLink href="#projects" text="PROJECTS" />
-            <span className="text-white font-light">|</span>
-            <NavLink href="#certifications" text="CERTIFICATIONS" />
-            <span className="text-white font-light">|</span>
-            <NavLink href="#faqs" text="FAQS" />
-          </nav>
-        </header>
+        <div className="w-full mt-[-2vw] px-16 pointer-events-auto overflow-hidden">
+          <header className="w-full flex justify-between text-base font-bold tracking-wide animate-john delay-1200">
+            <nav className="flex items-center gap-6">
+              <NavLink href="#home" text="HOME" />
+              <span className="text-white font-light">|</span>
+              <NavLink href="#about" text="ABOUT ME" />
+              <span className="text-white font-light">|</span>
+              <NavLink href="#experiences" text="EXPERIENCES" />
+            </nav>
+            <nav className="flex items-center gap-6">
+              <NavLink href="#projects" text="PROJECTS" />
+              <span className="text-white font-light">|</span>
+              <NavLink href="#certifications" text="CERTIFICATIONS" />
+              <span className="text-white font-light">|</span>
+              <NavLink href="#faqs" text="FAQS" />
+            </nav>
+          </header>
+        </div>
       </div>
 
       {/* Main Image */}
-      <img src="/HeroImage2.png" alt="John" className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[97vh] z-10 object-contain pointer-events-none animate-others delay-1200"
+      <img src="/HeroImage2.png" alt="John" className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[100vh] z-10 object-contain pointer-events-none animate-others delay-1400"
         style={{ WebkitMaskImage: 'radial-gradient(ellipse 70% 70% at 50% 50%, black 60%, transparent 100%)', maskImage: 'radial-gradient(ellipse 70% 70% at 50% 50%, black 60%, transparent 100%)' }} />
 
       {/* Editorial Hero Details */}
-      <div className="absolute bottom-14 left-14 z-20 text-base leading-relaxed font-medium text-[#aaa] animate-others delay-1400">
-        <p>Design with intent.</p>
-        <p>Built by John.</p>
+      <div className="absolute bottom-14 left-14 z-20 text-lg leading-relaxed font-medium text-[#aaa]">
+        <div className="overflow-hidden"><p className="animate-john delay-1600">Design with intent.</p></div>
+        <div className="overflow-hidden"><p className="animate-john" style={{ animationDelay: '1750ms' }}>Built by John.</p></div>
       </div>
 
-      <div className="absolute bottom-14 right-14 z-20 text-base leading-relaxed font-medium text-right text-[#aaa] animate-others delay-1400">
-        <p>Bold ideas, brought to the web.</p>
-        <p>Thoughtful design, built to move.</p>
-        <p>Experiences that leave a mark.</p>
+      <div className="absolute bottom-14 right-14 z-20 text-lg leading-relaxed font-medium text-right text-[#aaa]">
+        <div className="overflow-hidden flex justify-end"><p className="animate-john delay-1600">Bold ideas, brought to the web.</p></div>
+        <div className="overflow-hidden flex justify-end"><p className="animate-john" style={{ animationDelay: '1750ms' }}>Thoughtful design, built to move.</p></div>
+        <div className="overflow-hidden flex justify-end"><p className="animate-john" style={{ animationDelay: '1900ms' }}>Experiences that leave a mark.</p></div>
       </div>
       {/* Bottom Content Overlays */}
-      <div className="relative z-20 flex justify-center gap-16 items-end px-16 pb-16 h-full w-full pointer-events-none animate-others delay-1600">
+      <div className="relative z-20 flex justify-center gap-16 items-end px-16 pb-16 h-full w-full pointer-events-none animate-others delay-2000">
 
         {/* Left Side Cards */}
         <div className="flex flex-col gap-6 w-fit z-20 pointer-events-auto">
           <div className="glass-card flex items-center gap-6 p-6 w-[240px] -ml-12">
-            <div className="text-7xl font-black text-accent-yellow">J</div>
+            <img src="/jyellow.png" alt="J Logo" className="w-[58px] h-[72px] object-contain shrink-0" />
             <div className="text-base leading-tight text-white whitespace-nowrap">
               <strong className="text-2xl">10+</strong><br />
               Projects Made
@@ -167,7 +152,7 @@ function App() {
         {/* Center Content */}
         <div className="flex flex-col items-start gap-8 mb-8 z-20 pointer-events-auto">
           <h2 className="text-left text-white text-7xl font-black leading-[1.1] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)]">
-            Designed<br />To Be<br />Experienced.
+            Portfolio<br />Built To<br />Experience.
           </h2>
 
         </div>
@@ -177,23 +162,37 @@ function App() {
           <div className="glass-card w-fit p-6 -mt-20">
             <ul className="flex flex-col gap-4 w-full list-none whitespace-nowrap">
               <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-6 h-6 text-accent-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12,12 L20.66,7 A10,10 0 1,0 20.66,17 Z" /></svg>
                 Creative
               </li>
               <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-6 h-6 text-accent-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="7" cy="7" r="5" />
+                  <circle cx="17" cy="7" r="5" />
+                  <circle cx="7" cy="17" r="5" />
+                  <circle cx="17" cy="17" r="5" />
+                </svg>
                 Reliable
               </li>
               <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-6 h-6 text-accent-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M2 8 v10 a2 2 0 0 0 2 2 h16 a2 2 0 0 0 2-2 v-10 a2 2 0 0 0-4 0 v6 h-4 v-8 a2 2 0 0 0-4 0 v8 h-4 v-6 a2 2 0 0 0-4 0 z" /></svg>
                 Unique
               </li>
               <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-6 h-6 text-accent-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 3 L3 9.5 L12 15 L21 9.5 Z" />
+                  <path d="M12 11 L3 17.5 L12 23 L21 17.5 Z" />
+                </svg>
                 Builder
               </li>
               <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-6 h-6 text-accent-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="7" cy="7" r="5" />
+                  <circle cx="17" cy="7" r="5" />
+                  <circle cx="7" cy="17" r="5" />
+                  <circle cx="17" cy="17" r="5" />
+                  <rect x="7" y="7" width="10" height="10" />
+                </svg>
                 Efficient
               </li>
             </ul>
