@@ -106,6 +106,7 @@ const InteractiveWord = ({ children }) => {
 };
 
 function App() {
+
   React.useEffect(() => {
     let lastRatio = window.devicePixelRatio;
     const handleResize = () => {
@@ -131,7 +132,7 @@ function App() {
           ))}
         </h1>
         <div className="w-full mt-[-2vw] px-16 pointer-events-auto overflow-hidden">
-          <header className="w-full flex justify-between text-base font-bold tracking-wide animate-john delay-1200">
+          <header className="w-full flex justify-between text-lg font-bold tracking-wide animate-john delay-1200">
             <nav className="flex items-center gap-6">
               <NavLink href="#home" text="HOME" disableHover={true} />
               <span className="text-white/60 font-thin text-sm">|</span>
@@ -155,38 +156,38 @@ function App() {
         style={{ WebkitMaskImage: 'radial-gradient(ellipse 70% 70% at 50% 50%, black 60%, transparent 100%)', maskImage: 'radial-gradient(ellipse 70% 70% at 50% 50%, black 60%, transparent 100%)' }} />
 
       {/* Editorial Hero Details */}
-      <div className="absolute bottom-14 left-14 z-20 text-lg leading-relaxed font-medium text-[#aaa]">
+      <div className="absolute bottom-14 left-14 z-20 text-xl leading-relaxed font-medium text-[#aaa]">
         <div className="overflow-hidden"><p className="animate-john delay-1600">Designed with purpose.</p></div>
         <div className="overflow-hidden"><p className="animate-john" style={{ animationDelay: '1750ms' }}>Built by Jervys.</p></div>
       </div>
 
-      <div className="absolute bottom-14 right-14 z-20 text-lg leading-relaxed font-medium text-right text-[#aaa]">
-        <div className="overflow-hidden flex justify-end"><p className="animate-john delay-1600">Building ideas worth seeing.</p></div>
-        <div className="overflow-hidden flex justify-end"><p className="animate-john" style={{ animationDelay: '1750ms' }}>Designs worth feeling.</p></div>
-        <div className="overflow-hidden flex justify-end"><p className="animate-john" style={{ animationDelay: '1900ms' }}>Experiences worth remembering.</p></div>
+      <div className="absolute bottom-14 right-14 z-20 text-xl leading-relaxed font-medium text-right text-[#aaa]">
+        <div className="overflow-hidden flex justify-end"><p className="animate-john delay-1600">Building ideas worth seeing</p></div>
+        <div className="overflow-hidden flex justify-end"><p className="animate-john" style={{ animationDelay: '1750ms' }}>Designs worth feeling</p></div>
+        <div className="overflow-hidden flex justify-end"><p className="animate-john" style={{ animationDelay: '1900ms' }}>Experiences worth remembering</p></div>
       </div>
       {/* Bottom Content Overlays */}
       <div className="relative z-20 flex justify-center gap-16 items-end px-16 pb-16 h-full w-full pointer-events-none">
 
         {/* Left Side Cards */}
         <div className="flex flex-col gap-6 w-fit z-20 pointer-events-auto">
-          <div className="glass-card flex items-center gap-6 p-6 w-[15rem] -ml-12 animate-others delay-2000">
+          <div className="glass-card flex items-center gap-6 p-6 w-[16rem] -ml-12 animate-others delay-2000">
             <img
               src="/jyellow.png"
               alt="J Logo"
-              className="w-[3.625rem] h-[4.5rem] object-contain shrink-0"
+              className="w-[4rem] h-[5rem] object-contain shrink-0"
             />
-            <div className="text-base leading-tight text-white whitespace-nowrap">
-              <strong className="text-3xl">10+</strong><br />
-              Projects Made
+            <div className="text-2xl font-bold leading-tight text-white whitespace-nowrap flex flex-col justify-center">
+              <span>10+</span>
+              <span>Projects</span>
             </div>
           </div>
 
-          <div className="glass-card flex flex-col items-center justify-center gap-2 p-6 w-fit min-w-[8.75rem] animate-others delay-2000">
-            <div className="text-7xl font-black text-accent-yellow leading-none">
+          <div className="glass-card flex flex-col items-center justify-center gap-3 p-6 w-fit min-w-[10rem] animate-others delay-2000">
+            <div className="sm:text-7xl font-black text-accent-yellow leading-none">
               4+
             </div>
-            <div className="text-base leading-tight text-white text-center whitespace-nowrap">
+            <div className="text-2xl font-bold leading-tight text-white text-center whitespace-nowrap">
               Years of<br />Designing
             </div>
           </div>
@@ -194,52 +195,69 @@ function App() {
 
         {/* Center Content */}
         <div className="flex flex-col items-start gap-8 mb-8 z-20 pointer-events-auto">
-          <h2 className="text-left text-white text-7xl font-black leading-[1.1] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)] animate-others delay-2000 select-none">
+          <h2 className="text-left text-white text-[5.5rem] font-black leading-[1.05] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)] animate-others delay-2000 select-none">
             <InteractiveWord>Portfolio</InteractiveWord><br />
             <InteractiveWord>Built</InteractiveWord> <InteractiveWord>To</InteractiveWord><br />
             <InteractiveWord>Experience.</InteractiveWord>
           </h2>
 
+          <a
+            href="https://cal.com/jjcabalo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="self-end glass-card group !rounded-full relative inline-flex items-center justify-center gap-5 py-3.5 pl-8 pr-3.5 max-w-full transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] animate-others delay-2000 hover:bg-white/10 hover:scale-[1.03] hover:shadow-[0_15px_40px_rgba(255,255,255,0.1)] cursor-pointer border border-white/10 hover:border-white/20"
+          >
+            <span className="font-semibold text-xl text-white/80 group-hover:text-white transition-colors duration-300 whitespace-nowrap">
+              Book a Call
+            </span>
+
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white/80 group-hover:text-white transition-all duration-500 group-hover:bg-white/10 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+              <svg className="w-6 h-6 transition-transform duration-500 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          </a>
+
         </div>
 
         {/* Right Side Cards */}
-        <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto -translate-y-3">
-          <div className="glass-card w-fit p-6 -translate-y-3 animate-others delay-2000">
+        <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto -translate-y-6">
+          <div className="glass-card w-fit p-6 pr-12 -translate-y-3 animate-others delay-2000">
             <ul className="flex flex-col gap-4 w-full list-none whitespace-nowrap">
-              <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <li className="flex items-center gap-5 font-bold text-2xl text-white">
+                <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12,12 L20.66,7 A10,10 0 1,0 20.66,17 Z" />
                 </svg>
                 Creative
               </li>
 
-              <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <li className="flex items-center gap-5 font-bold text-2xl text-white">
+                <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <circle cx="7" cy="7" r="5" />
                   <circle cx="17" cy="7" r="5" />
                   <circle cx="7" cy="17" r="5" />
                   <circle cx="17" cy="17" r="5" />
                 </svg>
-                Detail-Oriented
+                Precise
               </li>
 
-              <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <li className="flex items-center gap-5 font-bold text-2xl text-white">
+                <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M2 8 v10 a2 2 0 0 0 2 2 h16 a2 2 0 0 0 2-2 v-10 a2 2 0 0 0-4 0 v6 h-4 v-8 a2 2 0 0 0-4 0 v8 h-4 v-6 a2 2 0 0 0-4 0 z" />
                 </svg>
                 Unique
               </li>
 
-              <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <li className="flex items-center gap-5 font-bold text-2xl text-white">
+                <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 3 L3 9.5 L12 15 L21 9.5 Z" />
                   <path d="M12 11 L3 17.5 L12 23 L21 17.5 Z" />
                 </svg>
                 Builder
               </li>
 
-              <li className="flex items-center gap-4 font-semibold text-base text-white">
-                <svg className="w-8 h-8 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <li className="flex items-center gap-5 font-bold text-2xl text-white">
+                <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <circle cx="7" cy="7" r="5" />
                   <circle cx="17" cy="7" r="5" />
                   <circle cx="7" cy="17" r="5" />
