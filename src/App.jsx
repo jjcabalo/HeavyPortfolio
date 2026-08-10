@@ -105,6 +105,173 @@ const InteractiveWord = ({ children }) => {
   );
 };
 
+const SpotlightButton = () => {
+  const buttonRef = React.useRef(null);
+  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0, tiltX: 0, tiltY: 0, glareAngle: 0 });
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const handleMouseMove = (e) => {
+    if (!buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Calculate realistic 3D tilt based on mouse position
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const tiltX = ((y - centerY) / centerY) * -10;
+    const tiltY = ((x - centerX) / centerX) * 10;
+
+    // Calculate angle for anisotropic glare based on vector from center
+    const glareAngle = (Math.atan2(y - centerY, x - centerX) * (180 / Math.PI)) + 90;
+
+    setMousePos({ x, y, tiltX, tiltY, glareAngle });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setMousePos(prev => ({ ...prev, tiltX: 0, tiltY: 0 }));
+  };
+
+  return (
+    <div style={{ perspective: '1000px' }} className="self-end animate-others delay-2000">
+      <a
+        href="https://cal.com/jjcabalo"
+        target="_blank"
+        rel="noopener noreferrer"
+        ref={buttonRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          '--mouse-x': `${mousePos.x}px`,
+          '--mouse-y': `${mousePos.y}px`,
+          '--glare-angle': `${mousePos.glareAngle}deg`,
+          transform: isHovered ? `rotateX(${mousePos.tiltX}deg) rotateY(${mousePos.tiltY}deg) scale(1.03)` : 'rotateX(0deg) rotateY(0deg) scale(1)',
+          transition: isHovered ? 'transform 0.1s ease-out, box-shadow 0.5s ease, border-color 0.5s ease' : 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+        }}
+        className="glass-card overflow-hidden group !rounded-full relative inline-flex items-center justify-center gap-5 py-3.5 pl-8 pr-3.5 max-w-full cursor-pointer border border-white/10 hover:border-white/30 hover:shadow-[inset_0_1px_15px_rgba(255,255,255,0.2),0_15px_40px_rgba(255,255,255,0.1)]"
+      >
+        {/* 1. Diffuse Ambient Glow (scattering) */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 mix-blend-overlay"
+          style={{
+            opacity: isHovered ? 1 : 0,
+            background: `radial-gradient(250px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.15), transparent 80%)`
+          }}
+        />
+
+        {/* 2. Specular Hotspot (glare) */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 mix-blend-color-dodge"
+          style={{
+            opacity: isHovered ? 0.5 : 0,
+            background: `radial-gradient(50px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.2), transparent 100%)`
+          }}
+        />
+
+        {/* 3. Angular Sheen (simulates polished glass reflections, CD-like) */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 mix-blend-overlay"
+          style={{
+            opacity: isHovered ? 1 : 0,
+            background: `conic-gradient(from var(--glare-angle) at 50% 50%, transparent 10%, rgba(255,255,255,0.1) 35%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 65%, transparent 90%)`
+          }}
+        />
+
+        <span className="relative z-10 font-semibold text-xl text-white/80 group-hover:text-white transition-colors duration-300 whitespace-nowrap drop-shadow-md">
+          Build With Me
+        </span>
+
+        <div className="relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white/80 group-hover:text-white transition-all duration-500 group-hover:bg-white/20 group-hover:shadow-[inset_0_0_10px_rgba(255,255,255,0.3),0_0_15px_rgba(255,255,255,0.2)]">
+          <svg className="w-6 h-6 transition-transform duration-500 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </div>
+      </a>
+    </div>
+  );
+};
+
+const SpotlightCard = ({ children, className = "", wrapperClassName = "" }) => {
+  const cardRef = React.useRef(null);
+  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0, tiltX: 0, tiltY: 0, glareAngle: 0 });
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Calculate realistic 3D tilt based on mouse position
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const tiltX = ((y - centerY) / centerY) * -10;
+    const tiltY = ((x - centerX) / centerX) * 10;
+
+    // Calculate angle for anisotropic glare based on vector from center
+    const glareAngle = (Math.atan2(y - centerY, x - centerX) * (180 / Math.PI)) + 90;
+
+    setMousePos({ x, y, tiltX, tiltY, glareAngle });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setMousePos(prev => ({ ...prev, tiltX: 0, tiltY: 0 }));
+  };
+
+  return (
+    <div style={{ perspective: '1000px' }} className={wrapperClassName}>
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          '--mouse-x': `${mousePos.x}px`,
+          '--mouse-y': `${mousePos.y}px`,
+          '--glare-angle': `${mousePos.glareAngle}deg`,
+          transform: isHovered ? `rotateX(${mousePos.tiltX}deg) rotateY(${mousePos.tiltY}deg) scale(1.02)` : 'rotateX(0deg) rotateY(0deg) scale(1)',
+          transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+        }}
+        className="glass-card relative overflow-hidden w-fit h-fit"
+      >
+        {/* 1. Diffuse Ambient Glow (scattering) */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 mix-blend-overlay"
+          style={{
+            opacity: isHovered ? 1 : 0,
+            background: `radial-gradient(250px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.15), transparent 80%)`
+          }}
+        />
+
+        {/* 2. Specular Hotspot (glare) */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 mix-blend-color-dodge"
+          style={{
+            opacity: isHovered ? 0.5 : 0,
+            background: `radial-gradient(50px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.2), transparent 100%)`
+          }}
+        />
+
+        {/* 3. Angular Sheen (simulates polished glass reflections, CD-like) */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 mix-blend-overlay"
+          style={{
+            opacity: isHovered ? 1 : 0,
+            background: `conic-gradient(from var(--glare-angle) at 50% 50%, transparent 10%, rgba(255,255,255,0.1) 35%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 65%, transparent 90%)`
+          }}
+        />
+
+        <div className={`relative z-10 ${className}`}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 function App() {
 
   React.useEffect(() => {
@@ -171,7 +338,7 @@ function App() {
 
         {/* Left Side Cards */}
         <div className="flex flex-col gap-6 w-fit z-20 pointer-events-auto">
-          <div className="glass-card flex items-center gap-6 p-6 w-[16rem] -ml-12 animate-others delay-2000">
+          <SpotlightCard wrapperClassName="animate-others delay-2000 -ml-12" className="flex items-center gap-6 p-6 w-[16rem]">
             <img
               src="/jyellow.png"
               alt="J Logo"
@@ -181,16 +348,16 @@ function App() {
               <span>10+</span>
               <span>Projects</span>
             </div>
-          </div>
+          </SpotlightCard>
 
-          <div className="glass-card flex flex-col items-center justify-center gap-3 p-6 w-fit min-w-[10rem] animate-others delay-2000">
-            <div className="sm:text-7xl font-black text-accent-yellow leading-none">
+          <SpotlightCard wrapperClassName="animate-others delay-2000" className="flex flex-col items-center justify-center gap-3 p-6 w-fit min-w-[10rem]">
+            <div className="text-8xl font-black text-accent-yellow leading-none">
               4+
             </div>
             <div className="text-2xl font-bold leading-tight text-white text-center whitespace-nowrap">
               Years of<br />Designing
             </div>
-          </div>
+          </SpotlightCard>
         </div>
 
         {/* Center Content */}
@@ -201,28 +368,13 @@ function App() {
             <InteractiveWord>Experience.</InteractiveWord>
           </h2>
 
-          <a
-            href="https://cal.com/jjcabalo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="self-end glass-card group !rounded-full relative inline-flex items-center justify-center gap-5 py-3.5 pl-8 pr-3.5 max-w-full transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] animate-others delay-2000 hover:bg-white/10 hover:scale-[1.03] hover:shadow-[0_15px_40px_rgba(255,255,255,0.1)] cursor-pointer border border-white/10 hover:border-white/20"
-          >
-            <span className="font-semibold text-xl text-white/80 group-hover:text-white transition-colors duration-300 whitespace-nowrap">
-              Book a Call
-            </span>
-
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white/80 group-hover:text-white transition-all duration-500 group-hover:bg-white/10 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-              <svg className="w-6 h-6 transition-transform duration-500 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </div>
-          </a>
+          <SpotlightButton />
 
         </div>
 
         {/* Right Side Cards */}
-        <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto -translate-y-5">
-          <div className="glass-card w-fit p-6 pr-12 -translate-y-3 animate-others delay-2000">
+        <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto -translate-y-3">
+          <SpotlightCard wrapperClassName="animate-others delay-2000 -translate-y-3" className="w-fit p-6">
             <ul className="flex flex-col gap-4 w-full list-none whitespace-nowrap">
               <li className="flex items-center gap-5 font-bold text-2xl text-white">
                 <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -238,7 +390,7 @@ function App() {
                   <circle cx="7" cy="17" r="5" />
                   <circle cx="17" cy="17" r="5" />
                 </svg>
-                Precise
+                Detail-Oriented
               </li>
 
               <li className="flex items-center gap-5 font-bold text-2xl text-white">
@@ -267,7 +419,7 @@ function App() {
                 Playful
               </li>
             </ul>
-          </div>
+          </SpotlightCard>
         </div>
 
       </div>
