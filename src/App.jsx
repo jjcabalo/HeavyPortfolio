@@ -134,16 +134,16 @@ function App() {
           <header className="w-full flex justify-between text-base font-bold tracking-wide animate-john delay-1200">
             <nav className="flex items-center gap-6">
               <NavLink href="#home" text="HOME" disableHover={true} />
-              <span className="text-white font-light">|</span>
+              <span className="text-white/60 font-thin text-sm">|</span>
               <NavLink href="#about" text="ABOUT ME" />
-              <span className="text-white font-light">|</span>
+              <span className="text-white/60 font-thin text-sm">|</span>
               <NavLink href="#experiences" text="EXPERIENCES" />
             </nav>
             <nav className="flex items-center gap-6">
               <NavLink href="#projects" text="PROJECTS" />
-              <span className="text-white font-light">|</span>
+              <span className="text-white/60 font-thin text-sm">|</span>
               <NavLink href="#certifications" text="CERTIFICATIONS" />
-              <span className="text-white font-light">|</span>
+              <span className="text-white/60 font-thin text-sm">|</span>
               <NavLink href="#faqs" text="FAQS" />
             </nav>
           </header>
