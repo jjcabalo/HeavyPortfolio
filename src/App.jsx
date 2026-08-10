@@ -157,7 +157,7 @@ function App() {
       {/* Editorial Hero Details */}
       <div className="absolute bottom-14 left-14 z-20 text-lg leading-relaxed font-medium text-[#aaa]">
         <div className="overflow-hidden"><p className="animate-john delay-1600">Designed with purpose.</p></div>
-        <div className="overflow-hidden"><p className="animate-john" style={{ animationDelay: '1750ms' }}>Built by John.</p></div>
+        <div className="overflow-hidden"><p className="animate-john" style={{ animationDelay: '1750ms' }}>Built by Jervys.</p></div>
       </div>
 
       <div className="absolute bottom-14 right-14 z-20 text-lg leading-relaxed font-medium text-right text-[#aaa]">
