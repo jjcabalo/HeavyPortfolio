@@ -12,8 +12,8 @@ html {
 @layer utilities {
   .glass-card {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-    backdrop-filter: blur(32px);
     -webkit-backdrop-filter: blur(32px);
+    backdrop-filter: blur(32px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     border-left: 1px solid rgba(255, 255, 255, 0.15);
