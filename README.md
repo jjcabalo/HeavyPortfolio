@@ -1,16 +1,66 @@
-# React + Vite
+# Jervys' Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A highly interactive, design-focused personal portfolio web application built with React, Vite, and Tailwind CSS. This project showcases a unique aesthetic with custom micro-animations, interactive typography, and a premium user experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Interactive Custom Cursor**: A smooth, custom-built cursor that reacts to clickable elements and enhances the user's immersion.
+- **Dynamic Typography**: Custom text reveal animations, staggered letter transitions, and interactive words that respond to hover states.
+- **Glassmorphism Design**: Sleek UI cards with backdrop blurs and semi-transparent borders for a modern, premium feel.
+- **Desktop-Optimized Experience**: Designed primarily for wider viewports with a dedicated notice for unsupported resolutions to ensure the design is viewed as intended.
+- **Performance Focused**: Built on top of Vite for rapid development and optimized production builds.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: [React 19](https://react.dev/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Linting**: [Oxlint](https://oxc.rs/docs/guide/usage/linter.html)
 
-## Expanding the Oxlint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository and navigate to the project directory:
+   ```bash
+   cd Portfolio
+   ```
+
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and visit the local URL provided by Vite (usually `http://localhost:5173`).
+
+### Building for Production
+
+To create an optimized production build, run:
+```bash
+npm run build
+```
+
+You can then preview the production build locally with:
+```bash
+npm run preview
+```
+
+## Project Structure
+
+- `src/App.jsx`: The main entry point containing the portfolio layout, interactive elements, and animations.
+- `src/index.css`: Global styles and Tailwind directives.
+- `public/`: Static assets such as images and icons (e.g., `HeroImage2.png`, `jyellow.png`).
+
+## License
+
+This project is private and intended for personal portfolio use.
