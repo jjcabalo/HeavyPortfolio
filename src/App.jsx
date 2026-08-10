@@ -132,7 +132,7 @@ function App() {
           ))}
         </h1>
         <div className="w-full mt-[-2vw] px-16 pointer-events-auto overflow-hidden">
-          <header className="w-full flex justify-between text-lg font-bold tracking-wide animate-john delay-1200">
+          <header className="w-full flex justify-between text-xl font-bold tracking-wide animate-john delay-1200">
             <nav className="flex items-center gap-6">
               <NavLink href="#home" text="HOME" disableHover={true} />
               <span className="text-white/60 font-thin text-sm">|</span>
@@ -221,7 +221,7 @@ function App() {
         </div>
 
         {/* Right Side Cards */}
-        <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto -translate-y-6">
+        <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto -translate-y-5">
           <div className="glass-card w-fit p-6 pr-12 -translate-y-3 animate-others delay-2000">
             <ul className="flex flex-col gap-4 w-full list-none whitespace-nowrap">
               <li className="flex items-center gap-5 font-bold text-2xl text-white">
