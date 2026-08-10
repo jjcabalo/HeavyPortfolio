@@ -123,10 +123,10 @@ function App() {
       <DesktopNotice />
       {/* Background Text & Nav Container (Locks them together) */}
       <div className="absolute top-[-5%] w-full flex flex-col items-center z-0 pointer-events-none">
-        <h1 className="animate-john-container text-[35vw] font-black text-[#ffd500]/80 leading-none whitespace-nowrap select-none tracking-tighter ml-[-0.8vw] flex justify-center">
-          {"JOHN".split("").map((char, index) => (
+        <h1 className="animate-john-container text-[30vw] font-black text-[#ffd500]/80 leading-none whitespace-nowrap select-none tracking-tighter ml-[-0.8vw] flex justify-center ">
+          {"JERVYS".split("").map((char, index) => (
             <span key={index} className="inline-flex overflow-hidden pb-[2vw] mb-[-2vw] px-[1vw] mx-[-1vw]">
-              <span className="animate-john inline-block leading-none" style={{ animationDelay: `${index * 100}ms` }}>{char}</span>
+              <span className="animate-john inline-block leading-none" style={{ animationDelay: `${index * 145}ms` }}>{char}</span>
             </span>
           ))}
         </h1>

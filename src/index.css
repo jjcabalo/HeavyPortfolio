@@ -54,11 +54,25 @@ body::after {
 }
 
 @keyframes textureJitter {
-  0% { background-position: 0px 0px; }
-  25% { background-position: 10px 15px; }
-  50% { background-position: -10px -5px; }
-  75% { background-position: 15px -10px; }
-  100% { background-position: 0px 0px; }
+  0% {
+    background-position: 0px 0px;
+  }
+
+  25% {
+    background-position: 10px 15px;
+  }
+
+  50% {
+    background-position: -10px -5px;
+  }
+
+  75% {
+    background-position: 15px -10px;
+  }
+
+  100% {
+    background-position: 0px 0px;
+  }
 }
 
 a,
@@ -122,19 +136,22 @@ button {
 
 @keyframes johnContainerSequence {
   0% {
-    transform: translate(100vw, 40vh);
+    transform: translate(100vw, 40vh) scale(0.88);
     animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
   }
+
   40% {
-    transform: translate(0, 40vh);
+    transform: translate(0, 40vh) scale(0.88);
     animation-timing-function: linear;
   }
+
   55% {
-    transform: translate(0, 40vh);
+    transform: translate(0, 40vh) scale(0.88);
     animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
+
   100% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(1);
   }
 }
 
