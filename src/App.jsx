@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import AIChatOverlay from './AIChatOverlay';
 
 const SlotText = ({ text, isAnimating }) => (
   <span className="flex gap-[0.25em]">
@@ -36,11 +37,11 @@ const CustomCursor = () => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 w-3 h-3 bg-[#ffd500] rounded-full pointer-events-none z-[100] mix-blend-difference transition-transform duration-100 ease-out`}
+        className={`fixed top-0 left-0 w-3 h-3 bg-[#ffd500] rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 ease-out`}
         style={{ transform: `translate(${pos.x - 6}px, ${pos.y - 6}px) scale(${isPointer ? 1.5 : 1})` }}
       />
       <div
-        className={`fixed top-0 left-0 w-10 h-10 border border-[#ffd500]/50 rounded-full pointer-events-none z-[100] transition-all duration-300 ease-out ${isPointer ? 'opacity-20 scale-150' : 'opacity-100'}`}
+        className={`fixed top-0 left-0 w-10 h-10 border border-[#ffd500]/50 rounded-full pointer-events-none z-[9999] transition-all duration-300 ease-out ${isPointer ? 'opacity-20 scale-150' : 'opacity-100'}`}
         style={{ transform: `translate(${pos.x - 20}px, ${pos.y - 20}px)` }}
       />
     </>
@@ -77,7 +78,7 @@ const DesktopNotice = () => {
   );
 };
 
-const NavLink = ({ href, text, disableHover }) => {
+const NavLink = ({ href, text, disableHover, onClick }) => {
   const [isAnimating, setIsAnimating] = React.useState(false);
 
   const handleMouseEnter = () => {
@@ -88,7 +89,7 @@ const NavLink = ({ href, text, disableHover }) => {
   };
 
   return (
-    <a href={href} className="group text-white" onMouseEnter={handleMouseEnter}>
+    <a href={href} className="group text-white" onMouseEnter={handleMouseEnter} onClick={onClick}>
       {disableHover ? text : <SlotText text={text} isAnimating={isAnimating} />}
     </a>
   );
@@ -194,6 +195,7 @@ const SpotlightButton = () => {
 };
 
 function App() {
+  const [isAIChatOpen, setIsAIChatOpen] = React.useState(false);
 
   React.useEffect(() => {
     let lastRatio = window.devicePixelRatio;
@@ -210,6 +212,7 @@ function App() {
     <div className="relative w-screen h-screen flex flex-col justify-between overflow-hidden bg-studio-rays">
       <CustomCursor />
       <DesktopNotice />
+      <AIChatOverlay isOpen={isAIChatOpen} onClose={() => setIsAIChatOpen(false)} />
       {/* Background Text & Nav Container (Locks them together) */}
       <div className="absolute top-[-5%] w-full flex flex-col items-center z-0 pointer-events-none">
         <h1 className="animate-john-container text-[30vw] font-black text-[#ffd500]/80 leading-none whitespace-nowrap select-none tracking-tighter ml-[-0.8vw] flex justify-center ">
@@ -233,7 +236,7 @@ function App() {
               <span className="text-white/60 font-thin text-sm">|</span>
               <NavLink href="#certifications" text="CERTIFICATIONS" />
               <span className="text-white/60 font-thin text-sm">|</span>
-              <NavLink href="#faqs" text="FAQS" />
+              <NavLink href="#ask-me" text="ASK ME" onClick={(e) => { e.preventDefault(); setIsAIChatOpen(true); }} />
             </nav>
           </header>
         </div>
