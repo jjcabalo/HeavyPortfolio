@@ -10,7 +10,7 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
   const [scareStage, setScareStage] = useState(-1);
   const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  
+
   const inputRef = useRef(null);
   const endOfMessagesRef = useRef(null);
 
@@ -27,14 +27,14 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
   const scarePhrases = [
     "Before I answer...",
     "Here is what we have from your browser...",
-    `Location: ${visitorData?.city || 'Unknown'}, ${visitorData?.region || ''}, ${visitorData?.country || ''}`,
-    `IP Address: ${visitorData?.ip_address || 'Unknown'}`,
-    `Approximate Coordinates: ${visitorData?.loc || 'Unknown'}`,
-    `Browser: ${visitorData?.user_agent || 'Unknown'}`,
-    `Time: ${formattedTime}`,
-    `Connection: ${visitorData?.org || 'Unknown'}`,
+    `You are from ${visitorData?.city || 'Unknown'}, ${visitorData?.region || ''}, ${visitorData?.country || ''}`,
+    `Your IP Address is ${visitorData?.ip_address || 'Unknown'}`,
+    `Your exact location is ${visitorData?.loc || 'Unknown'}`,
+    `You are using ${visitorData?.user_agent || 'Unknown'}`,
+    `You sent that on ${formattedTime}`,
+    `You are connected to ${visitorData?.org || 'Unknown'}`,
     "None of this needed your permission.",
-    "Your browser tracks every move.",
+    "Your browser tracks your every move.",
     "So be mindful."
   ];
 
@@ -43,7 +43,7 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
     if (scareStage >= 0 && scareStage < scarePhrases.length) {
       const currentPhrase = scarePhrases[scareStage];
       const typingSpeed = 30; // Faster typing
-      
+
       if (!isDeleting) {
         if (displayedText.length < currentPhrase.length) {
           const timeout = setTimeout(() => {
@@ -112,7 +112,7 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
         else if (ua.includes("Edge") || ua.includes("Edg")) browserName = "Microsoft Edge";
         else if (ua.includes("Chrome")) browserName = "Google Chrome";
         else if (ua.includes("Safari")) browserName = "Apple Safari";
-        
+
         let generatedId = localStorage.getItem('visitor_id');
         let isReturning = true;
         if (!generatedId) {
@@ -132,12 +132,13 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
           org: ipData.organization || '',
           timezone: ipData.timezone || ''
         };
-        
-        if (!isReturning) {
-          const { error } = await supabase.from('visitors').insert([newVisitor]);
-          if (error) console.error("Supabase Error:", error);
+
+        // Unconditionally try to insert to fix broken sync. Ignore '23505' (already exists).
+        const { error } = await supabase.from('visitors').insert([newVisitor]);
+        if (error && error.code !== '23505') {
+          console.error("Supabase Error:", error);
         }
-        
+
         setVisitorData(newVisitor);
 
         // Fetch past chat history
@@ -207,11 +208,14 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
       try {
         // Log user message to Supabase
         if (visitorData && visitorData.id !== 'temp-id') {
-          supabase.from('chat_history').insert([{ visitor_id: visitorData.id, role: 'user', content: userMessage }]).then();
+          supabase.from('chat_history').insert([{ visitor_id: visitorData.id, role: 'user', content: userMessage }])
+            .then(({ error: userChatErr }) => {
+              if (userChatErr) console.error("Chat User Insert Error:", userChatErr);
+            });
         }
 
         const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
-        
+
         const historyForApi = chatHistory.map(msg => ({
           role: msg.role === 'user' ? 'user' : 'model',
           parts: [{ text: msg.content }]
@@ -226,30 +230,36 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
         const response = await ai.models.generateContent({
           model: 'gemini-3.5-flash-lite',
           contents: [
-             { role: 'user', parts: [{text: systemInstruction}]},
-             { role: 'model', parts: [{text: "Got it! I am Jervys' personal assistant and I know him well. I will only answer questions about him and his work, and I will speak English by default unless asked to use conversational Tagalog/Taglish. I have also memorized the security protocol."}]},
-             ...historyForApi,
-             { role: 'user', parts: [{text: userMessage}]}
+            { role: 'user', parts: [{ text: systemInstruction }] },
+            { role: 'model', parts: [{ text: "Got it! I am Jervys' personal assistant and I know him well. I will only answer questions about him and his work, and I will speak English by default unless asked to use conversational Tagalog/Taglish. I have also memorized the security protocol." }] },
+            ...historyForApi,
+            { role: 'user', parts: [{ text: userMessage }] }
           ]
         });
 
         const aiText = response.text.trim();
-        
+
         if (aiText === '[VULGARITY_DETECTED]') {
           // Remove the vulgar query from local state so it doesn't show
           setChatHistory(prev => prev.slice(0, -1));
           // Trigger the scare sequence
           setScareStage(0);
-          
+
           // Log detection to DB so it can be filtered out on reload
           if (visitorData && visitorData.id !== 'temp-id') {
-            supabase.from('chat_history').insert([{ visitor_id: visitorData.id, role: 'ai', content: aiText }]).then();
+            supabase.from('chat_history').insert([{ visitor_id: visitorData.id, role: 'ai', content: aiText }])
+              .then(({ error: aiChatErr }) => {
+                if (aiChatErr) console.error("Chat AI Insert Error (Vulgar):", aiChatErr);
+              });
           }
         } else {
           setChatHistory(prev => [...prev, { role: 'ai', content: aiText }]);
           // Log AI response to Supabase
           if (visitorData && visitorData.id !== 'temp-id') {
-            supabase.from('chat_history').insert([{ visitor_id: visitorData.id, role: 'ai', content: aiText }]).then();
+            supabase.from('chat_history').insert([{ visitor_id: visitorData.id, role: 'ai', content: aiText }])
+              .then(({ error: aiChatErr }) => {
+                if (aiChatErr) console.error("Chat AI Insert Error:", aiChatErr);
+              });
           }
         }
       } catch (error) {
@@ -263,12 +273,12 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
   };
 
   return (
-    <div 
+    <div
       className={`fixed inset-0 z-[999] bg-black/60 backdrop-blur-2xl flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
       onClick={handleContainerClick}
     >
       <div className="w-full h-full max-w-5xl flex flex-col p-8 lg:p-12" onClick={handleContainerClick}>
-        
+
         {scareStage >= 0 ? (
           <div className="flex flex-col gap-6 w-full h-full justify-center text-left relative overflow-hidden">
             <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter text-left">
@@ -276,66 +286,66 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
             </h2>
           </div>
         ) : chatHistory.length === 0 ? (
-           <div className="flex flex-col gap-6 w-full animate-fade-in my-auto">
-             <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter text-left">
-               What do you want to ask?
-             </h2>
-             <input
-               ref={inputRef}
-               type="text"
-               value={query}
-               onChange={(e) => setQuery(e.target.value)}
-               onKeyDown={handleSubmit}
-               className="bg-transparent border-none text-white text-2xl md:text-3xl font-medium outline-none py-2 caret-[#ffd500] pointer-events-auto w-full text-right"
-               placeholder=""
-             />
-           </div>
+          <div className="flex flex-col gap-6 w-full animate-fade-in my-auto">
+            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter text-left">
+              What do you want to ask?
+            </h2>
+            <input
+              ref={inputRef}
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleSubmit}
+              className="bg-transparent border-none text-white text-2xl md:text-3xl font-medium outline-none py-2 caret-[#ffd500] pointer-events-auto w-full text-right"
+              placeholder=""
+            />
+          </div>
         ) : (
-           <div className="flex flex-col w-full h-full relative">
-             <div 
-               className="flex-1 overflow-y-auto flex flex-col gap-8 pb-32 pt-16 px-10 -mx-10 scrollbar-hide" 
-               style={{ 
-                 maskImage: 'linear-gradient(to bottom, transparent, black 5%, black 85%, transparent)',
-                 WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 5%, black 85%, transparent)'
-               }}
-             >
-               {chatHistory.map((msg, idx) => (
-                 <div key={idx} className={`flex w-full animate-pop-in ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                   <div className={`glass-card max-w-[85%] rounded-3xl p-6 md:p-8 text-2xl md:text-3xl font-medium leading-relaxed text-white shadow-xl text-left ${msg.role === 'user' ? 'border-[#ffd500]/30 bg-[#ffd500]/5' : 'border-white/10'}`}>
-                     {msg.content}
-                   </div>
-                 </div>
-               ))}
-               
-               {isTyping && (
-                 <div className="flex w-full justify-start animate-pop-in">
-                   <div className="glass-card rounded-3xl px-8 py-5 flex items-center gap-4 border-white/10 shadow-xl">
-                     <span className="text-white/60 font-medium text-2xl md:text-3xl">Analyzing</span>
-                     <div className="flex gap-2">
-                       <div className="w-2.5 h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '0ms' }} />
-                       <div className="w-2.5 h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '150ms' }} />
-                       <div className="w-2.5 h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '300ms' }} />
-                     </div>
-                   </div>
-                 </div>
-               )}
+          <div className="flex flex-col w-full h-full relative">
+            <div
+              className="flex-1 overflow-y-auto flex flex-col gap-8 pb-32 pt-16 px-10 -mx-10 scrollbar-hide"
+              style={{
+                maskImage: 'linear-gradient(to bottom, transparent, black 5%, black 85%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 5%, black 85%, transparent)'
+              }}
+            >
+              {chatHistory.map((msg, idx) => (
+                <div key={idx} className={`flex w-full animate-pop-in ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`glass-card max-w-[85%] rounded-3xl p-6 md:p-8 text-2xl md:text-3xl font-medium leading-relaxed text-white shadow-xl text-left ${msg.role === 'user' ? 'border-[#ffd500]/30 bg-[#ffd500]/5' : 'border-white/10'}`}>
+                    {msg.content}
+                  </div>
+                </div>
+              ))}
 
-               <div className="w-full flex justify-end mt-4">
-                 <input
-                   ref={inputRef}
-                   type="text"
-                   value={query}
-                   onChange={(e) => setQuery(e.target.value)}
-                   onKeyDown={handleSubmit}
-                   className="bg-transparent border-none text-white text-2xl md:text-3xl font-medium outline-none py-2 caret-[#ffd500] w-full max-w-[85%] placeholder:text-white/20 text-right"
-                   placeholder=""
-                   disabled={isTyping}
-                 />
-               </div>
-               
-               <div ref={endOfMessagesRef} className="h-16 shrink-0" />
-             </div>
-           </div>
+              {isTyping && (
+                <div className="flex w-full justify-start animate-pop-in">
+                  <div className="glass-card rounded-3xl px-8 py-5 flex items-center gap-4 border-white/10 shadow-xl">
+                    <span className="text-white/60 font-medium text-2xl md:text-3xl">Analyzing</span>
+                    <div className="flex gap-2">
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="w-full flex justify-end mt-4">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={handleSubmit}
+                  className="bg-transparent border-none text-white text-2xl md:text-3xl font-medium outline-none py-2 caret-[#ffd500] w-full max-w-[85%] placeholder:text-white/20 text-right"
+                  placeholder=""
+                  disabled={isTyping}
+                />
+              </div>
+
+              <div ref={endOfMessagesRef} className="h-16 shrink-0" />
+            </div>
+          </div>
         )}
       </div>
     </div>
