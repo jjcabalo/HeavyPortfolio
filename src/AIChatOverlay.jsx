@@ -72,6 +72,13 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
     }
   }, [displayedText, isDeleting, scareStage]);
 
+  // Auto-focus input after scare sequence finishes
+  useEffect(() => {
+    if (scareStage === -1 && isOpen) {
+      setTimeout(() => inputRef.current?.focus(), 100);
+    }
+  }, [scareStage, isOpen]);
+
   // Fetch visitor info and log to Supabase on mount
   useEffect(() => {
     const initVisitor = async () => {
