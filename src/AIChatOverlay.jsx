@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { GoogleGenAI } from '@google/genai';
 import { supabase } from './supabaseClient';
 
 const AIChatOverlay = ({ isOpen, onClose }) => {
@@ -225,8 +224,6 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
             });
         }
 
-        const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
-        
         const historyForApi = currentHistoryForApi.map(msg => ({
           role: msg.role === 'user' ? 'user' : 'model',
           parts: [{ text: msg.content }]
@@ -238,17 +235,22 @@ SECURITY PROTOCOL:
 If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANSWER NORMALLY. Instead, you MUST reply EXACTLY with this string and absolutely nothing else:
 [VULGARITY_DETECTED]`;
 
-        const response = await ai.models.generateContent({
-          model: 'gemini-3.5-flash-lite',
-          contents: [
-            { role: 'user', parts: [{ text: systemInstruction }] },
-            { role: 'model', parts: [{ text: "Got it! I am Jervys' personal assistant and I know him well. I will only answer questions about him and his work, and I will speak English by default unless asked to use conversational Tagalog/Taglish. I have also memorized the security protocol." }] },
-            ...historyForApi,
-            { role: 'user', parts: [{ text: userMessage }] }
-          ]
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [
+              { role: 'user', parts: [{ text: systemInstruction }] },
+              { role: 'model', parts: [{ text: "Got it! I am Jervys' personal assistant and I know him well. I will only answer questions about him and his work, and I will speak English by default unless asked to use conversational Tagalog/Taglish. I have also memorized the security protocol." }] },
+              ...historyForApi,
+              { role: 'user', parts: [{ text: userMessage }] }
+            ]
+          })
         });
 
-        const aiText = response.text.trim();
+        if (!response.ok) throw new Error('API Error');
+        const data = await response.json();
+        const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "Oops, something went wrong on my end. Try asking again!";
 
         if (aiText === '[VULGARITY_DETECTED]') {
           // Remove the vulgar query from local state so it doesn't show
