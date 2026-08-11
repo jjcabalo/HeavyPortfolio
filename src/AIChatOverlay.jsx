@@ -311,6 +311,7 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
               onKeyDown={handleSubmit}
               className="bg-transparent border-none text-white text-2xl md:text-3xl font-medium outline-none py-2 caret-[#ffd500] pointer-events-auto w-full text-right"
               placeholder=""
+              disabled={!isOpen}
             />
           </div>
         ) : (
@@ -352,7 +353,7 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
                   onKeyDown={handleSubmit}
                   className="bg-transparent border-none text-white text-2xl md:text-3xl font-medium outline-none py-2 caret-[#ffd500] w-full max-w-[85%] placeholder:text-white/20 text-right"
                   placeholder=""
-                  disabled={isTyping}
+                  disabled={isTyping || !isOpen}
                 />
               </div>
 
