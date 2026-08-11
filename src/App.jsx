@@ -298,7 +298,7 @@ function App() {
 
         {/* Right Side Cards */}
         <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto -translate-y-7">
-          <div className="glass-card w-fit p-6 pr-10 animate-others delay-2000 -translate-y-3">
+          <div className="glass-card w-fit p-6 pr-12 animate-others delay-2000 -translate-y-3">
             <ul className="flex flex-col gap-4 w-full list-none whitespace-nowrap">
               <li className="flex items-center gap-5 font-bold text-2xl text-white">
                 <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">

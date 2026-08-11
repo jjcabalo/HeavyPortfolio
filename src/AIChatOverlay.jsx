@@ -5,6 +5,7 @@ import { supabase } from './supabaseClient';
 const AIChatOverlay = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
+  const [savedHistory, setSavedHistory] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const [visitorData, setVisitorData] = useState(null);
   const [scareStage, setScareStage] = useState(-1);
@@ -162,7 +163,7 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
               }
               filteredChats.push(pastChats[i]);
             }
-            setChatHistory(filteredChats);
+            setSavedHistory(filteredChats);
           }
         }
       } catch (err) {
@@ -202,7 +203,17 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
     if (e.key === 'Enter' && query.trim() && !isTyping) {
       const userMessage = query.trim();
       setQuery('');
-      setChatHistory(prev => [...prev, { role: 'user', content: userMessage }]);
+      
+      // If this is the first message of the session, prepend the saved history
+      let currentHistoryForApi = [];
+      if (chatHistory.length === 0) {
+        currentHistoryForApi = [...savedHistory, { role: 'user', content: userMessage }];
+        setChatHistory(currentHistoryForApi);
+      } else {
+        currentHistoryForApi = [...chatHistory, { role: 'user', content: userMessage }];
+        setChatHistory(currentHistoryForApi);
+      }
+      
       setIsTyping(true);
 
       try {
@@ -215,8 +226,8 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
         }
 
         const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
-
-        const historyForApi = chatHistory.map(msg => ({
+        
+        const historyForApi = currentHistoryForApi.map(msg => ({
           role: msg.role === 'user' ? 'user' : 'model',
           parts: [{ text: msg.content }]
         }));
