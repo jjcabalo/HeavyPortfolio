@@ -37,11 +37,11 @@ const CustomCursor = () => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 w-3 h-3 bg-[#ffd500] rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 ease-out`}
+        className={`hidden lg:block fixed top-0 left-0 w-3 h-3 bg-[#ffd500] rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 ease-out`}
         style={{ transform: `translate(${pos.x - 6}px, ${pos.y - 6}px) scale(${isPointer ? 1.5 : 1})` }}
       />
       <div
-        className={`fixed top-0 left-0 w-10 h-10 border border-[#ffd500]/50 rounded-full pointer-events-none z-[9999] transition-all duration-300 ease-out ${isPointer ? 'opacity-20 scale-150' : 'opacity-100'}`}
+        className={`hidden lg:block fixed top-0 left-0 w-10 h-10 border border-[#ffd500]/50 rounded-full pointer-events-none z-[9999] transition-all duration-300 ease-out ${isPointer ? 'opacity-20 scale-150' : 'opacity-100'}`}
         style={{ transform: `translate(${pos.x - 20}px, ${pos.y - 20}px)` }}
       />
     </>
