@@ -202,7 +202,7 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
     if (e.key === 'Enter' && query.trim() && !isTyping) {
       const userMessage = query.trim();
       setQuery('');
-      
+
       // If this is the first message of the session, prepend the saved history
       let currentHistoryForApi = [];
       if (chatHistory.length === 0) {
@@ -212,7 +212,7 @@ const AIChatOverlay = ({ isOpen, onClose }) => {
         currentHistoryForApi = [...chatHistory, { role: 'user', content: userMessage }];
         setChatHistory(currentHistoryForApi);
       }
-      
+
       setIsTyping(true);
 
       try {
@@ -290,17 +290,29 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
       className={`fixed inset-0 z-[999] bg-black/60 backdrop-blur-2xl flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
       onClick={handleContainerClick}
     >
-      <div className="w-full h-full max-w-5xl flex flex-col p-8 lg:p-12" onClick={handleContainerClick}>
+      {(chatHistory.length > 0 && scareStage < 0) && (
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[1000] glass-card flex flex-col items-center justify-center cursor-pointer rounded-2xl shrink-0 hover:bg-white/5 transition-all duration-300 lg:hidden backdrop-blur-md"
+          style={{ width: '76px', height: '76px' }}
+        >
+          <div className="relative w-8 h-8 flex items-center justify-center">
+            <div className="absolute w-8 h-[2px] bg-white rounded rotate-45"></div>
+            <div className="absolute w-8 h-[2px] bg-white rounded -rotate-45"></div>
+          </div>
+        </button>
+      )}
+      <div className="w-full h-full max-w-5xl flex flex-col p-8 lg:p-12 mt-20 md:mt-0" onClick={handleContainerClick}>
 
         {scareStage >= 0 ? (
           <div className="flex flex-col gap-6 w-full h-full justify-center text-left relative overflow-hidden">
-            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter text-left">
+            <h2 className="text-6xl md:text-7xl font-black text-white tracking-tighter text-left">
               {displayedText}<span className="animate-pulse">|</span>
             </h2>
           </div>
         ) : chatHistory.length === 0 ? (
           <div className="flex flex-col gap-6 w-full animate-fade-in my-auto">
-            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter text-left">
+            <h2 className="text-6xl md:text-7xl font-black text-white tracking-tighter text-left">
               What do you want to ask?
             </h2>
             <input
@@ -309,6 +321,7 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleSubmit}
+              onFocus={(e) => setTimeout(() => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300)}
               className="bg-transparent border-none text-white text-2xl md:text-3xl font-medium outline-none py-2 caret-[#ffd500] pointer-events-auto w-full text-right"
               placeholder=""
               disabled={!isOpen}
@@ -351,6 +364,7 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleSubmit}
+                  onFocus={(e) => setTimeout(() => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300)}
                   className="bg-transparent border-none text-white text-2xl md:text-3xl font-medium outline-none py-2 caret-[#ffd500] w-full max-w-[85%] placeholder:text-white/20 text-right"
                   placeholder=""
                   disabled={isTyping || !isOpen}

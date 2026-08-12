@@ -6,7 +6,13 @@
 @tailwind utilities;
 
 html {
-  font-size: clamp(8px, calc(100vw / 120), 24px);
+  font-size: clamp(14px, calc(100vw / 120), 24px);
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;
 }
 
 @layer utilities {
