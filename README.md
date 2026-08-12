@@ -12,31 +12,22 @@
     <img src="https://img.shields.io/badge/React-000000?style=for-the-badge&logo=react&logoColor=ffd500" alt="React" />
     <img src="https://img.shields.io/badge/Vite-000000?style=for-the-badge&logo=vite&logoColor=ffd500" alt="Vite" />
     <img src="https://img.shields.io/badge/Tailwind_CSS-000000?style=for-the-badge&logo=tailwind-css&logoColor=ffd500" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/Supabase-000000?style=for-the-badge&logo=supabase&logoColor=ffd500" alt="Supabase" />
   </p>
 </div>
 
 <br/>
 
-## ⚡ Overview
+## ⚡ Introduction
 
-A highly interactive, design-focused personal portfolio web application built with React, Vite, and Tailwind CSS. This project showcases a unique aesthetic with custom micro-animations, interactive typography, and a premium user experience. 
+Welcome to my digital space. I am Jervys, and this portfolio introduces my creative vision, technical expertise, and passion for design. I build experiences that bridge the gap between aesthetics and functionality.
 
-Designed with a sleek **yellow and black** theme, reflecting a modern, bold, and creative identity.
+## 📁 Technical Foundation
 
-## ✨ Key Features
-
-| Feature | Description |
-| :--- | :--- |
-| 🟡 **Interactive Custom Cursor** | A smooth, custom-built cursor that reacts to clickable elements and enhances immersion. |
-| 🟡 **Dynamic Typography** | Custom text reveal animations, staggered letter transitions, and interactive words. |
-| 🟡 **Glassmorphism Design** | Sleek UI cards with backdrop blurs and semi-transparent borders for a premium feel. |
-| 🟡 **Desktop-Optimized** | Designed primarily for wider viewports with a dedicated notice for unsupported resolutions. |
-
-## 📁 Project Structure
-
-- `src/App.jsx` — The main entry point containing the portfolio layout, interactive elements, and animations.
-- `src/index.css` — Global styles and Tailwind directives.
-- `public/` — Static assets such as images and icons.
+This portfolio runs on a robust modern stack:
+- **Frontend Core**: React and Vite for blazing fast performance.
+- **Styling**: Tailwind CSS for granular, utility-first design.
+- **Backend & Storage**: Supabase for secure and scalable data management.
 
 <br/>
 
