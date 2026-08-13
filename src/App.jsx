@@ -110,7 +110,7 @@ const AnimatedTitle = () => {
   }, [isMobile]);
 
   return (
-    <h2 className="text-left text-white text-[5.5rem] font-black leading-[1.05] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)] animate-others delay-2000 select-none mt-16 mb-4 lg:my-0 ml-8 lg:ml-0">
+    <h2 className="text-left text-white text-[4rem] lg:text-[5.5rem] font-black leading-[1.05] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)] animate-others delay-2000 select-none mt-16 mb-4 lg:my-0 ml-8 lg:ml-0">
       <InteractiveWord isActive={activeIndex === 0}>Portfolio</InteractiveWord><br />
       <InteractiveWord isActive={activeIndex === 1}>Built</InteractiveWord> <InteractiveWord isActive={activeIndex === 2}>To</InteractiveWord><br />
       <InteractiveWord isActive={activeIndex === 3}>Experience.</InteractiveWord>
@@ -164,7 +164,7 @@ const SpotlightButton = ({ className = "self-end", text = "Build With Me", href 
           transform: isHovered ? `rotateX(${mousePos.tiltX}deg) rotateY(${mousePos.tiltY}deg) scale(1.03)` : 'rotateX(0deg) rotateY(0deg) scale(1)',
           transition: isHovered ? 'transform 0.1s ease-out, box-shadow 0.5s ease, border-color 0.5s ease' : 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
         }}
-        className="glass-card overflow-hidden group !rounded-full relative inline-flex items-center justify-center gap-5 py-3.5 pl-8 pr-3.5 max-w-full cursor-pointer border border-white/10 hover:border-white/30 hover:shadow-[inset_0_1px_15px_rgba(255,255,255,0.2),0_15px_40px_rgba(255,255,255,0.1)]"
+        className="glass-card overflow-hidden group !rounded-full relative inline-flex items-center justify-center gap-4 lg:gap-5 py-2.5 lg:py-3.5 pl-6 lg:pl-8 pr-2.5 lg:pr-3.5 max-w-full cursor-pointer border border-white/10 hover:border-white/30 hover:shadow-[inset_0_1px_15px_rgba(255,255,255,0.2),0_15px_40px_rgba(255,255,255,0.1)]"
       >
         {/* 1. Diffuse Ambient Glow (scattering) */}
         <div
@@ -193,13 +193,13 @@ const SpotlightButton = ({ className = "self-end", text = "Build With Me", href 
           }}
         />
 
-        <span className="relative z-10 font-semibold text-2xl lg:text-xl text-white/80 group-hover:text-white transition-colors duration-300 whitespace-nowrap drop-shadow-md">
+        <span className="relative z-10 font-semibold text-xl text-white/80 group-hover:text-white transition-colors duration-300 whitespace-nowrap drop-shadow-md">
           {text}
         </span>
 
-        <div className="relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white/80 group-hover:text-white transition-all duration-500 group-hover:bg-white/20 group-hover:shadow-[inset_0_0_10px_rgba(255,255,255,0.3),0_0_15px_rgba(255,255,255,0.2)]">
+        <div className="relative z-10 flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white/80 group-hover:text-white transition-all duration-500 group-hover:bg-white/20 group-hover:shadow-[inset_0_0_10px_rgba(255,255,255,0.3),0_0_15px_rgba(255,255,255,0.2)]">
           {icon || (
-            <svg className="w-6 h-6 transition-transform duration-500 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg className="w-5 h-5 lg:w-6 lg:h-6 transition-transform duration-500 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           )}
@@ -243,39 +243,36 @@ function App() {
       <AIChatOverlay isOpen={isAIChatOpen} onClose={() => setIsAIChatOpen(false)} />
 
       {/* Mobile Top Logo (Left) */}
-      <div className={`fixed top-4 left-4 sm:top-6 sm:left-6 z-[100] flex items-center lg:hidden transition-all duration-500 ease-out ${(isLogoVisible || isMobileMenuOpen) ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-4'}`}>
+      <div className={`fixed top-4 left-6 sm:top-6 sm:left-6 z-[100] flex items-center lg:hidden transition-all duration-500 ease-out ${(isLogoVisible || isMobileMenuOpen) ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-4'}`}>
         <div
-          className="flex items-center justify-center bg-accent-yellow text-black font-black text-4xl tracking-tighter rounded-2xl px-4"
-          style={{ height: '76px' }}
+          className="flex items-center justify-center bg-accent-yellow text-black font-black text-2xl lg:text-4xl tracking-tighter rounded-xl px-4 h-14 lg:h-[76px]"
         >
-          JERVYS<sup className="text-lg -ml-1 -mt-4">&reg;</sup>
+          JERVYS<sup className="text-sm lg:text-lg -ml-1 -mt-4">&reg;</sup>
         </div>
       </div>
 
       {/* Mobile Top Actions (Right) */}
-      <div className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[100] flex items-center gap-3 lg:hidden">
+      <div className="fixed top-4 right-6 sm:top-6 sm:right-6 z-[100] flex items-center gap-3 lg:hidden">
         <button
-          className="glass-card flex items-center justify-center gap-3 cursor-pointer rounded-2xl px-6 group transition-all duration-300 hover:bg-white/5"
-          style={{ height: '76px' }}
+          className="glass-card flex items-center justify-center gap-3 cursor-pointer !rounded-xl px-4 lg:px-6 group transition-all duration-300 hover:bg-white/5 h-14 lg:h-[76px]"
           onClick={(e) => { e.preventDefault(); setIsAIChatOpen(true); }}
         >
-          <span className="font-black text-4xl tracking-tighter lg:font-semibold lg:text-xl lg:tracking-normal text-white/80 group-hover:text-white transition-colors duration-300">
+          <span className="font-black text-2xl tracking-tighter lg:font-semibold lg:text-xl lg:tracking-normal text-white/80 group-hover:text-white transition-colors duration-300">
             ASK ME
           </span>
-          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white/80 group-hover:text-white group-hover:bg-white/20 transition-all duration-500">
-            <svg className="w-6 h-6 text-accent-yellow transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor" fillRule="evenodd" clipRule="evenodd">
+          <div className="flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white/80 group-hover:text-white group-hover:bg-white/20 transition-all duration-500">
+            <svg className="w-5 h-5 lg:w-6 lg:h-6 text-accent-yellow transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor" fillRule="evenodd" clipRule="evenodd">
               <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm8 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
             </svg>
           </div>
         </button>
         <button
-          className="glass-card flex flex-col items-center justify-center gap-[6px] cursor-pointer rounded-2xl shrink-0 relative z-[110]"
-          style={{ width: '76px', height: '76px' }}
+          className="glass-card flex flex-col items-center justify-center gap-[6px] cursor-pointer !rounded-xl shrink-0 relative z-[110] w-14 h-14 lg:w-[76px] lg:h-[76px]"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          <div className={`w-8 h-[2px] bg-white rounded transition-all duration-300 ${isMobileMenuOpen ? 'translate-y-[4px]' : ''}`}></div>
-          <div className={`w-8 h-[2px] bg-white rounded transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0 scale-x-0' : ''}`}></div>
-          <div className={`w-8 h-[2px] bg-white rounded transition-all duration-300 ${isMobileMenuOpen ? '-translate-y-[4px]' : ''}`}></div>
+          <div className={`w-6 lg:w-8 h-[2px] bg-white rounded transition-all duration-300 ${isMobileMenuOpen ? 'translate-y-[4px]' : ''}`}></div>
+          <div className={`w-6 lg:w-8 h-[2px] bg-white rounded transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0 scale-x-0' : ''}`}></div>
+          <div className={`w-6 lg:w-8 h-[2px] bg-white rounded transition-all duration-300 ${isMobileMenuOpen ? '-translate-y-[4px]' : ''}`}></div>
         </button>
       </div>
 
@@ -285,14 +282,14 @@ function App() {
           className={`absolute inset-0 bg-black/40 transition-all duration-500 ease-in-out ${isMobileMenuOpen ? 'opacity-100 backdrop-blur-md' : 'opacity-0 backdrop-blur-none'}`}
           onClick={() => setIsMobileMenuOpen(false)}
         />
-        <div className={`absolute top-32 right-4 sm:right-6 left-4 sm:left-6 glass-card p-10 flex flex-col items-start gap-8 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isMobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0'}`}>
-          <nav className="flex flex-col items-start gap-8 font-black text-4xl tracking-tight pointer-events-auto text-white overflow-hidden">
+        <div className={`absolute top-28 right-6 left-6 sm:right-6 sm:left-6 glass-card p-10 flex flex-col items-start gap-8 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isMobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0'}`}>
+          <nav className="flex flex-col items-start gap-6 font-black text-2xl tracking-tight pointer-events-auto text-white overflow-hidden">
             {[
-              { href: "#home", text: "HOME", icon: <svg className="w-10 h-10 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12,12 L20.66,7 A10,10 0 1,0 20.66,17 Z" /></svg> },
-              { href: "#about", text: "ABOUT ME", icon: <svg className="w-10 h-10 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="7" r="5" /><circle cx="17" cy="7" r="5" /><circle cx="7" cy="17" r="5" /><circle cx="17" cy="17" r="5" /></svg> },
-              { href: "#experiences", text: "EXPERIENCES", icon: <svg className="w-10 h-10 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M2 8 v10 a2 2 0 0 0 2 2 h16 a2 2 0 0 0 2-2 v-10 a2 2 0 0 0-4 0 v6 h-4 v-8 a2 2 0 0 0-4 0 v8 h-4 v-6 a2 2 0 0 0-4 0 z" /></svg> },
-              { href: "#projects", text: "PROJECTS", icon: <svg className="w-10 h-10 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 L3 9.5 L12 15 L21 9.5 Z" /><path d="M12 11 L3 17.5 L12 23 L21 17.5 Z" /></svg> },
-              { href: "#certifications", text: "CERTIFICATIONS", icon: <svg className="w-10 h-10 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="7" r="5" /><circle cx="17" cy="7" r="5" /><rect x="2" y="12" width="10" height="10" /><circle cx="17" cy="17" r="5" /></svg> }
+              { href: "#home", text: "HOME", icon: <svg className="w-7 h-7 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12,12 L20.66,7 A10,10 0 1,0 20.66,17 Z" /></svg> },
+              { href: "#about", text: "ABOUT ME", icon: <svg className="w-7 h-7 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="7" r="5" /><circle cx="17" cy="7" r="5" /><circle cx="7" cy="17" r="5" /><circle cx="17" cy="17" r="5" /></svg> },
+              { href: "#experiences", text: "EXPERIENCES", icon: <svg className="w-7 h-7 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M2 8 v10 a2 2 0 0 0 2 2 h16 a2 2 0 0 0 2-2 v-10 a2 2 0 0 0-4 0 v6 h-4 v-8 a2 2 0 0 0-4 0 v8 h-4 v-6 a2 2 0 0 0-4 0 z" /></svg> },
+              { href: "#projects", text: "PROJECTS", icon: <svg className="w-7 h-7 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 L3 9.5 L12 15 L21 9.5 Z" /><path d="M12 11 L3 17.5 L12 23 L21 17.5 Z" /></svg> },
+              { href: "#certifications", text: "CERTIFICATIONS", icon: <svg className="w-7 h-7 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="7" r="5" /><circle cx="17" cy="7" r="5" /><rect x="2" y="12" width="10" height="10" /><circle cx="17" cy="17" r="5" /></svg> }
             ].map((link, i) => (
               <div
                 key={link.text}
@@ -354,24 +351,24 @@ function App() {
       <div className="relative z-20 flex flex-col lg:flex-row justify-start lg:justify-center gap-12 lg:gap-16 items-start lg:items-end px-6 lg:px-16 pb-16 h-full w-full pointer-events-none mt-[30vh] lg:mt-0">
 
         {/* Left Side Cards */}
-        <div className="flex flex-col gap-6 w-fit z-20 pointer-events-auto self-start lg:self-auto order-1 lg:order-none lg:-ml-12 mt-20 lg:mt-0 translate-y-24 lg:translate-y-0">
-          <div className="glass-card flex items-center gap-6 p-8 lg:p-6 w-[20rem] lg:w-[16rem] animate-others delay-2000">
+        <div className="flex flex-col gap-6 w-fit z-20 pointer-events-auto self-start lg:self-auto order-1 lg:order-none lg:-ml-12 mt-20 lg:mt-0 translate-y-16 lg:translate-y-0">
+          <div className="glass-card flex items-center gap-5 lg:gap-6 p-5 lg:p-6 w-[15rem] lg:w-[16rem] animate-others delay-2000">
             <img
               src="/jyellow.png"
               alt="J Logo"
-              className="w-[5.5rem] h-[6.5rem] lg:w-[4rem] lg:h-[5rem] object-contain shrink-0"
+              className="w-[4rem] h-[5rem] object-contain shrink-0"
             />
-            <div className="text-3xl lg:text-2xl font-bold leading-tight text-white whitespace-nowrap flex flex-col justify-center">
+            <div className="text-xl lg:text-2xl font-bold leading-tight text-white whitespace-nowrap flex flex-col justify-center">
               <span>10+</span>
               <span>Projects</span>
             </div>
           </div>
 
-          <div className="glass-card flex flex-col items-center justify-center gap-3 p-8 lg:p-6 w-fit min-w-[12rem] lg:min-w-[10rem] animate-others delay-2000">
-            <div className="text-9xl lg:text-8xl font-black text-accent-yellow leading-none">
+          <div className="glass-card flex flex-col items-center justify-center gap-3 p-5 lg:p-6 w-fit min-w-[9rem] lg:min-w-[10rem] animate-others delay-2000">
+            <div className="text-7xl lg:text-8xl font-black text-accent-yellow leading-none">
               4+
             </div>
-            <div className="text-3xl lg:text-2xl font-bold leading-tight text-white text-center whitespace-nowrap">
+            <div className="text-xl lg:text-2xl font-bold leading-tight text-white text-center whitespace-nowrap">
               Years of<br />Designing
             </div>
           </div>
@@ -384,24 +381,24 @@ function App() {
           <SpotlightButton className="self-end mr-8 lg:mr-0" />
 
           {/* Mobile Only: Combined Editorial Text */}
-          <div className="text-3xl leading-relaxed font-medium text-center text-[#aaa] lg:hidden animate-others delay-2000 self-center w-full pr-6 mt-32 mb-20">
+          <div className="text-2xl lg:text-3xl leading-relaxed font-medium text-left text-[#aaa] lg:hidden animate-others delay-2000 self-start w-full px-0 mt-20 mb-12">
             Designed with purpose. Built by Jervys. Building ideas worth seeing, designs worth feeling, experiences worth remembering.
           </div>
         </div>
 
         {/* Right Side Cards */}
         <div className="flex flex-col gap-8 items-end w-fit pointer-events-auto self-end lg:self-auto order-2 lg:order-3 lg:-translate-y-7">
-          <div className="glass-card w-fit p-8 lg:p-6 pr-14 lg:pr-12 animate-others delay-2000 lg:-translate-y-3">
-            <ul className="flex flex-col gap-6 lg:gap-4 w-full list-none whitespace-nowrap">
-              <li className="flex items-center gap-6 lg:gap-5 font-bold text-3xl lg:text-2xl text-white">
-                <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <div className="glass-card w-fit p-5 lg:p-6 pr-10 lg:pr-12 animate-others delay-2000 lg:-translate-y-3">
+            <ul className="flex flex-col gap-4 w-full list-none whitespace-nowrap">
+              <li className="flex items-center gap-4 lg:gap-5 font-bold text-xl lg:text-2xl text-white">
+                <svg className="w-6 h-6 lg:w-9 lg:h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12,12 L20.66,7 A10,10 0 1,0 20.66,17 Z" />
                 </svg>
                 Creative
               </li>
 
-              <li className="flex items-center gap-6 lg:gap-5 font-bold text-3xl lg:text-2xl text-white">
-                <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <li className="flex items-center gap-4 lg:gap-5 font-bold text-xl lg:text-2xl text-white">
+                <svg className="w-6 h-6 lg:w-9 lg:h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <circle cx="7" cy="7" r="5" />
                   <circle cx="17" cy="7" r="5" />
                   <circle cx="7" cy="17" r="5" />
@@ -410,23 +407,23 @@ function App() {
                 Precise
               </li>
 
-              <li className="flex items-center gap-6 lg:gap-5 font-bold text-3xl lg:text-2xl text-white">
-                <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <li className="flex items-center gap-4 lg:gap-5 font-bold text-xl lg:text-2xl text-white">
+                <svg className="w-6 h-6 lg:w-9 lg:h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M2 8 v10 a2 2 0 0 0 2 2 h16 a2 2 0 0 0 2-2 v-10 a2 2 0 0 0-4 0 v6 h-4 v-8 a2 2 0 0 0-4 0 v8 h-4 v-6 a2 2 0 0 0-4 0 z" />
                 </svg>
                 Unique
               </li>
 
-              <li className="flex items-center gap-6 lg:gap-5 font-bold text-3xl lg:text-2xl text-white">
-                <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <li className="flex items-center gap-4 lg:gap-5 font-bold text-xl lg:text-2xl text-white">
+                <svg className="w-6 h-6 lg:w-9 lg:h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 3 L3 9.5 L12 15 L21 9.5 Z" />
                   <path d="M12 11 L3 17.5 L12 23 L21 17.5 Z" />
                 </svg>
                 Builder
               </li>
 
-              <li className="flex items-center gap-6 lg:gap-5 font-bold text-3xl lg:text-2xl text-white">
-                <svg className="w-9 h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <li className="flex items-center gap-4 lg:gap-5 font-bold text-xl lg:text-2xl text-white">
+                <svg className="w-6 h-6 lg:w-9 lg:h-9 text-accent-yellow shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <circle cx="7" cy="7" r="5" />
                   <circle cx="17" cy="7" r="5" />
                   <rect x="2" y="12" width="10" height="10" />

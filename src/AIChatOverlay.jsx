@@ -293,12 +293,11 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
       {(chatHistory.length > 0 && scareStage < 0) && (
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[1000] glass-card flex flex-col items-center justify-center cursor-pointer rounded-2xl shrink-0 hover:bg-white/5 transition-all duration-300 lg:hidden backdrop-blur-md"
-          style={{ width: '76px', height: '76px' }}
+          className="absolute top-4 right-6 sm:top-6 sm:right-6 z-[1000] glass-card flex flex-col items-center justify-center cursor-pointer !rounded-xl shrink-0 hover:bg-white/5 transition-all duration-300 lg:hidden backdrop-blur-md w-14 h-14 lg:w-[76px] lg:h-[76px]"
         >
-          <div className="relative w-8 h-8 flex items-center justify-center">
-            <div className="absolute w-8 h-[2px] bg-white rounded rotate-45"></div>
-            <div className="absolute w-8 h-[2px] bg-white rounded -rotate-45"></div>
+          <div className="relative w-6 h-6 lg:w-8 lg:h-8 flex items-center justify-center">
+            <div className="absolute w-6 lg:w-8 h-[2px] bg-white rounded rotate-45"></div>
+            <div className="absolute w-6 lg:w-8 h-[2px] bg-white rounded -rotate-45"></div>
           </div>
         </button>
       )}
@@ -306,13 +305,13 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
 
         {scareStage >= 0 ? (
           <div className="flex flex-col gap-6 w-full h-full justify-center text-left relative overflow-hidden">
-            <h2 className="text-6xl md:text-7xl font-black text-white tracking-tighter text-left">
+            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter text-left">
               {displayedText}<span className="animate-pulse">|</span>
             </h2>
           </div>
         ) : chatHistory.length === 0 ? (
           <div className="flex flex-col gap-6 w-full animate-fade-in my-auto">
-            <h2 className="text-6xl md:text-7xl font-black text-white tracking-tighter text-left">
+            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter text-left">
               What do you want to ask?
             </h2>
             <input
@@ -322,7 +321,7 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleSubmit}
               onFocus={(e) => setTimeout(() => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300)}
-              className="bg-transparent border-none text-white text-2xl md:text-3xl font-medium outline-none py-2 caret-[#ffd500] pointer-events-auto w-full text-right"
+              className="bg-transparent border-none text-white text-lg md:text-3xl font-medium outline-none py-2 caret-[#ffd500] pointer-events-auto w-full text-right"
               placeholder=""
               disabled={!isOpen}
             />
@@ -330,7 +329,7 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
         ) : (
           <div className="flex flex-col w-full h-full relative">
             <div
-              className="flex-1 overflow-y-auto flex flex-col gap-8 pb-32 pt-16 px-10 -mx-10 scrollbar-hide"
+              className="flex-1 overflow-y-auto flex flex-col gap-6 md:gap-8 pb-32 pt-16 px-6 md:px-10 -mx-6 md:-mx-10 scrollbar-hide"
               style={{
                 maskImage: 'linear-gradient(to bottom, transparent, black 5%, black 85%, transparent)',
                 WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 5%, black 85%, transparent)'
@@ -338,7 +337,7 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
             >
               {chatHistory.map((msg, idx) => (
                 <div key={idx} className={`flex w-full animate-pop-in ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`glass-card max-w-[85%] rounded-3xl p-6 md:p-8 text-2xl md:text-3xl font-medium leading-relaxed text-white shadow-xl text-left ${msg.role === 'user' ? 'border-[#ffd500]/30 bg-[#ffd500]/5' : 'border-white/10'}`}>
+                  <div className={`glass-card max-w-[90%] md:max-w-[85%] rounded-2xl md:rounded-3xl p-4 md:p-8 text-base md:text-3xl font-medium leading-relaxed text-white shadow-xl text-left ${msg.role === 'user' ? 'border-[#ffd500]/30 bg-[#ffd500]/5' : 'border-white/10'}`}>
                     {msg.content}
                   </div>
                 </div>
@@ -346,12 +345,12 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
 
               {isTyping && (
                 <div className="flex w-full justify-start animate-pop-in">
-                  <div className="glass-card rounded-3xl px-8 py-5 flex items-center gap-4 border-white/10 shadow-xl">
-                    <span className="text-white/60 font-medium text-2xl md:text-3xl">Analyzing</span>
+                  <div className="glass-card rounded-2xl md:rounded-3xl px-6 py-4 md:px-8 md:py-5 flex items-center gap-4 border-white/10 shadow-xl">
+                    <span className="text-white/60 font-medium text-base md:text-3xl">Analyzing</span>
                     <div className="flex gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '300ms' }} />
+                      <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#ffd500] animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                   </div>
                 </div>
@@ -365,7 +364,7 @@ If the user uses vulgar, highly disrespectful, or offensive language, DO NOT ANS
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleSubmit}
                   onFocus={(e) => setTimeout(() => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300)}
-                  className="bg-transparent border-none text-white text-2xl md:text-3xl font-medium outline-none py-2 caret-[#ffd500] w-full max-w-[85%] placeholder:text-white/20 text-right"
+                  className="bg-transparent border-none text-white text-base md:text-3xl font-medium outline-none py-2 caret-[#ffd500] w-full max-w-[90%] md:max-w-[85%] placeholder:text-white/20 text-right"
                   placeholder=""
                   disabled={isTyping || !isOpen}
                 />
